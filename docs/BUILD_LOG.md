@@ -51,6 +51,8 @@
 | 43 | 2026-04-24 | 0 | `tsconfig.json` | 0bbd63c | chore(repo): initialize foundation and app scaffold |
 | 44 | 2026-04-24 | 0 | `vite.config.ts` | 0bbd63c | chore(repo): initialize foundation and app scaffold |
 
+| 45 | 2026-04-24 | 0 | `docs/BUILD_LOG.md` | f760459 | docs(log): record foundation scaffold |
+
 ## Phase 1 - Database Schema
 
 | # | Date | Phase | File | Commit | Subject |
@@ -73,9 +75,16 @@
 | 16 | 2026-04-24 | 1 | `src/lib/server/db/schema/shared.ts` | f870e67 | feat(db): add initial schema and migration |
 | 17 | 2026-04-24 | 1 | `src/lib/server/db/schema/webhooks.ts` | f870e67 | feat(db): add initial schema and migration |
 
+| 18 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | ce88607 | docs(log): record database schema |
+
+| 19 | 2026-04-24 | 1 | `CHANGELOG.md` | 3f630a3 | chore(release): prepare v0.2.0 |
+| 20 | 2026-04-24 | 1 | `ROADMAP.md` | 3f630a3 | chore(release): prepare v0.2.0 |
+| 21 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 3f630a3 | chore(release): prepare v0.2.0 |
+| 22 | 2026-04-24 | 1 | `package.json` | 3f630a3 | chore(release): prepare v0.2.0 |
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |
 |---|---|---|---|---|
-| v0.1.0 | 2026-04-24 | 0 | 0bbd63c | Phase 0: Foundation and app scaffold complete |
-| v0.2.0 | 2026-04-24 | 1 | f870e67 | Phase 1: Database schema complete |
+| v0.1.0 | 2026-04-24 | 0 | f760459 | Phase 0: Foundation and app scaffold complete |
+| v0.2.0 | 2026-04-24 | 1 | 3f630a3 | Phase 1: Database schema complete |

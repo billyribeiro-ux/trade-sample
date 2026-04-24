@@ -82,9 +82,31 @@
 | 21 | 2026-04-24 | 1 | `docs/BUILD_LOG.md` | 3f630a3 | chore(release): prepare v0.2.0 |
 | 22 | 2026-04-24 | 1 | `package.json` | 3f630a3 | chore(release): prepare v0.2.0 |
 
+## Phase 2 - Database Seeding
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+| 1 | 2026-04-24 | 2 | `drizzle/seed/db.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 2 | 2026-04-24 | 2 | `drizzle/seed/ids.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 3 | 2026-04-24 | 2 | `drizzle/seed/index.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 4 | 2026-04-24 | 2 | `drizzle/seed/permissions.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 5 | 2026-04-24 | 2 | `drizzle/seed/personas.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 6 | 2026-04-24 | 2 | `drizzle/seed/products.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 7 | 2026-04-24 | 2 | `drizzle/seed/purchases.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 8 | 2026-04-24 | 2 | `drizzle/seed/reset.ts` | bb0341b | feat(seed): add local database seed scripts |
+| 9 | 2026-04-24 | 2 | `package.json` | bb0341b | feat(seed): add local database seed scripts |
+| 10 | 2026-04-24 | 2 | `pnpm-lock.yaml` | bb0341b | feat(seed): add local database seed scripts |
+| 11 | 2026-04-24 | 2 | `src/lib/server/auth/password.ts` | bb0341b | feat(seed): add local database seed scripts |
+
+| 12 | 2026-04-24 | 2 | `drizzle/migrations/meta/0000_snapshot.json` | 12bca3b | style(db): format schema metadata |
+| 13 | 2026-04-24 | 2 | `drizzle/migrations/meta/_journal.json` | 12bca3b | style(db): format schema metadata |
+| 14 | 2026-04-24 | 2 | `src/lib/server/db/schema/auth.ts` | 12bca3b | style(db): format schema metadata |
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |
 |---|---|---|---|---|
 | v0.1.0 | 2026-04-24 | 0 | f760459 | Phase 0: Foundation and app scaffold complete |
 | v0.2.0 | 2026-04-24 | 1 | 3f630a3 | Phase 1: Database schema complete |
+| v0.3.0 | 2026-04-24 | 2 | pending | Phase 2: Database seeding complete |

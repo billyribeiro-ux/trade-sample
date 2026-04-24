@@ -7,6 +7,14 @@ Semantic Versioning after `v1.0.0`.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-04-24
+
+### Added
+
+- Added local seed/reset scripts for roles, permissions, products, prices,
+  personas, purchases, and entitlements.
+- Added reusable scrypt password hashing for seeded credentials and Better Auth.
+
 ## [0.2.0] - 2026-04-24
 
 ### Added

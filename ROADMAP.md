@@ -12,7 +12,7 @@
 - Neon and Drizzle setup.
 - Auth, RBAC, products, purchases, entitlements, downloads, webhooks, and audit schema.
 
-## Phase 2: Database Seeding
+## Phase 2: Database Seeding - Complete
 
 - Products, prices, roles, permissions, personas, and sample purchases.
 

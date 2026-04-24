@@ -51,6 +51,28 @@
 | 43 | 2026-04-24 | 0 | `tsconfig.json` | 0bbd63c | chore(repo): initialize foundation and app scaffold |
 | 44 | 2026-04-24 | 0 | `vite.config.ts` | 0bbd63c | chore(repo): initialize foundation and app scaffold |
 
+## Phase 1 - Database Schema
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-24 | 1 | `drizzle.config.ts` | f870e67 | feat(db): add initial schema and migration |
+| 2 | 2026-04-24 | 1 | `drizzle/migrations/0000_initial_schema.sql` | f870e67 | feat(db): add initial schema and migration |
+| 3 | 2026-04-24 | 1 | `drizzle/migrations/meta/0000_snapshot.json` | f870e67 | feat(db): add initial schema and migration |
+| 4 | 2026-04-24 | 1 | `drizzle/migrations/meta/_journal.json` | f870e67 | feat(db): add initial schema and migration |
+| 5 | 2026-04-24 | 1 | `package.json` | f870e67 | feat(db): add initial schema and migration |
+| 6 | 2026-04-24 | 1 | `pnpm-lock.yaml` | f870e67 | feat(db): add initial schema and migration |
+| 7 | 2026-04-24 | 1 | `src/lib/server/db/index.ts` | f870e67 | feat(db): add initial schema and migration |
+| 8 | 2026-04-24 | 1 | `src/lib/server/db/schema/audit.ts` | f870e67 | feat(db): add initial schema and migration |
+| 9 | 2026-04-24 | 1 | `src/lib/server/db/schema/auth.ts` | f870e67 | feat(db): add initial schema and migration |
+| 10 | 2026-04-24 | 1 | `src/lib/server/db/schema/downloads.ts` | f870e67 | feat(db): add initial schema and migration |
+| 11 | 2026-04-24 | 1 | `src/lib/server/db/schema/entitlements.ts` | f870e67 | feat(db): add initial schema and migration |
+| 12 | 2026-04-24 | 1 | `src/lib/server/db/schema/index.ts` | f870e67 | feat(db): add initial schema and migration |
+| 13 | 2026-04-24 | 1 | `src/lib/server/db/schema/products.ts` | f870e67 | feat(db): add initial schema and migration |
+| 14 | 2026-04-24 | 1 | `src/lib/server/db/schema/purchases.ts` | f870e67 | feat(db): add initial schema and migration |
+| 15 | 2026-04-24 | 1 | `src/lib/server/db/schema/rbac.ts` | f870e67 | feat(db): add initial schema and migration |
+| 16 | 2026-04-24 | 1 | `src/lib/server/db/schema/shared.ts` | f870e67 | feat(db): add initial schema and migration |
+| 17 | 2026-04-24 | 1 | `src/lib/server/db/schema/webhooks.ts` | f870e67 | feat(db): add initial schema and migration |
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |

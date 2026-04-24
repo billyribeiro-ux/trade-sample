@@ -1,0 +1,15 @@
+pre-commit:
+  parallel: true
+  commands:
+    biome:
+      run: pnpm biome check .
+    typecheck:
+      run: pnpm check
+    gitleaks:
+      run: pnpm gitleaks detect --no-git --redact
+
+commit-msg:
+  commands:
+    commitlint:
+      run: pnpm commitlint --edit {1}
+

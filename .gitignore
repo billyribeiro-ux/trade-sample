@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# SvelteKit / Vite
+.svelte-kit/
+build/
+dist/
+.vite/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Vercel
+.vercel/
+
+# Tests and coverage
+coverage/
+playwright-report/
+test-results/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System
+.DS_Store
+Thumbs.db
+
+# Local databases and generated files
+*.sqlite
+*.sqlite3
+*.db
+drizzle/meta/_journal.json.tmp
+

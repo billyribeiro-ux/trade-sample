@@ -1,0 +1,11 @@
+title = "The Trading Store gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allow local example URLs"
+regexes = [
+  '''http://localhost:5173''',
+]
+

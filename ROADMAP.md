@@ -1,12 +1,12 @@
 # Roadmap
 
-## Phase 0: Foundation
+## Phase 0: Foundation - Complete
 
 - Repository documentation.
 - Environment and tooling configuration.
 - Design tokens and architectural decisions.
 
-## Phase 1: Database Schema
+## Phase 1: Database Schema - Complete
 
 - SvelteKit scaffold.
 - Neon and Drizzle setup.
@@ -63,4 +63,3 @@
 ## Phase 14: Testing & CI/CD
 
 - Unit, integration, E2E, CI, production runbooks, and release.
-

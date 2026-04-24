@@ -77,4 +77,5 @@
 
 | Tag | Date | Phase | Commit | Description |
 |---|---|---|---|---|
-
+| v0.1.0 | 2026-04-24 | 0 | 0bbd63c | Phase 0: Foundation and app scaffold complete |
+| v0.2.0 | 2026-04-24 | 1 | f870e67 | Phase 1: Database schema complete |

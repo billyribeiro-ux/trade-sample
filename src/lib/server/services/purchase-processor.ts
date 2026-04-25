@@ -13,6 +13,7 @@ import {
 } from '$lib/server/db/schema';
 import { sendEmail, getAppUrl } from '$lib/server/email';
 import { purchaseConfirmationTemplate, refundIssuedTemplate } from '$lib/server/email/templates';
+import { getStripe } from '$lib/server/stripe/client';
 
 function requireString(value: string | null | undefined, label: string): string {
   if (!value) {
@@ -20,6 +21,19 @@ function requireString(value: string | null | undefined, label: string): string 
   }
 
   return value;
+}
+
+async function getReceiptUrl(paymentIntentId: string): Promise<string | null> {
+  const paymentIntent = await getStripe().paymentIntents.retrieve(paymentIntentId, {
+    expand: ['latest_charge'],
+  });
+  const charge = paymentIntent.latest_charge;
+
+  if (typeof charge === 'object' && charge?.receipt_url) {
+    return charge.receipt_url;
+  }
+
+  return null;
 }
 
 export async function recordWebhookEvent(event: Stripe.Event): Promise<boolean> {
@@ -72,6 +86,7 @@ export async function processCheckoutCompleted(
     throw new Error('Checkout metadata references missing rows.');
   }
 
+  const receiptUrl = await getReceiptUrl(paymentIntentId);
   const [purchase] = await db
     .insert(purchases)
     .values({
@@ -82,6 +97,7 @@ export async function processCheckoutCompleted(
       currency: session.currency ?? price.currency,
       stripeCheckoutSessionId: session.id,
       stripePaymentIntentId: paymentIntentId,
+      stripeReceiptUrl: receiptUrl,
       status: 'completed',
       purchasedAt: new Date(),
     })
@@ -89,6 +105,7 @@ export async function processCheckoutCompleted(
       target: purchases.stripeCheckoutSessionId,
       set: {
         status: 'completed',
+        stripeReceiptUrl: receiptUrl,
       },
     })
     .returning();
@@ -122,9 +139,28 @@ export async function processCheckoutCompleted(
     ...purchaseConfirmationTemplate({
       bookTitle: product.name,
       libraryUrl: `${getAppUrl()}/library`,
-      receiptUrl: null,
+      receiptUrl,
     }),
   });
+}
+
+export async function processPaymentIntentFailed(
+  eventId: string,
+  paymentIntent: Stripe.PaymentIntent,
+): Promise<void> {
+  await db.insert(auditLog).values({
+    actorId: paymentIntent.metadata.user_id || null,
+    action: 'purchase.payment_failed',
+    resourceType: 'product',
+    resourceId: paymentIntent.metadata.product_id || null,
+    metadata: {
+      paymentIntentId: paymentIntent.id,
+      failureCode: paymentIntent.last_payment_error?.code ?? null,
+      failureMessage: paymentIntent.last_payment_error?.message ?? null,
+    },
+  });
+
+  await markWebhookProcessed(eventId);
 }
 
 export async function processChargeRefunded(eventId: string, charge: Stripe.Charge): Promise<void> {
@@ -148,6 +184,17 @@ export async function processChargeRefunded(eventId: string, charge: Stripe.Char
       .set({ revokedAt: new Date() })
       .where(and(eq(entitlements.purchaseId, purchase.id), isNull(entitlements.revokedAt)));
 
+    await db.insert(auditLog).values({
+      actorId: purchase.userId,
+      action: 'purchase.refunded',
+      resourceType: 'purchase',
+      resourceId: purchase.id,
+      metadata: {
+        paymentIntentId,
+        chargeId: charge.id,
+      },
+    });
+
     const [user] = await db.select().from(users).where(eq(users.id, purchase.userId)).limit(1);
 
     if (user) {
@@ -158,6 +205,50 @@ export async function processChargeRefunded(eventId: string, charge: Stripe.Char
         ),
       });
     }
+  }
+
+  await markWebhookProcessed(eventId);
+}
+
+export async function processDisputeCreated(
+  eventId: string,
+  dispute: Stripe.Dispute,
+): Promise<void> {
+  const chargeId = typeof dispute.charge === 'string' ? dispute.charge : dispute.charge.id;
+  const charge =
+    typeof dispute.charge === 'string' ? await getStripe().charges.retrieve(chargeId) : dispute.charge;
+  const paymentIntentId =
+    typeof charge.payment_intent === 'string' ? charge.payment_intent : charge.payment_intent?.id;
+
+  if (!paymentIntentId) {
+    await markWebhookProcessed(eventId);
+    return;
+  }
+
+  const [purchase] = await db
+    .update(purchases)
+    .set({ status: 'disputed' })
+    .where(eq(purchases.stripePaymentIntentId, paymentIntentId))
+    .returning();
+
+  if (purchase) {
+    await db
+      .update(entitlements)
+      .set({ revokedAt: new Date() })
+      .where(and(eq(entitlements.purchaseId, purchase.id), isNull(entitlements.revokedAt)));
+
+    await db.insert(auditLog).values({
+      actorId: purchase.userId,
+      action: 'purchase.disputed',
+      resourceType: 'purchase',
+      resourceId: purchase.id,
+      metadata: {
+        paymentIntentId,
+        chargeId,
+        disputeId: dispute.id,
+        reason: dispute.reason,
+      },
+    });
   }
 
   await markWebhookProcessed(eventId);

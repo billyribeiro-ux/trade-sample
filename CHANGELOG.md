@@ -14,6 +14,8 @@ Semantic Versioning after `v1.0.0`.
 - Added programmatic Drizzle migration script for reliable localhost migrations.
 - Added admin customer detail pages with purchase history, entitlement history,
   audit context, and manual entitlement grant/revoke workflows.
+- Added Stripe checkout success reconciliation, receipt capture, payment failure
+  audit logging, and dispute webhook entitlement revocation.
 
 ### Changed
 

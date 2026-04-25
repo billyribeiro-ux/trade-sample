@@ -4,6 +4,8 @@ import type { RequestEvent } from './$types';
 import {
   processChargeRefunded,
   processCheckoutCompleted,
+  processDisputeCreated,
+  processPaymentIntentFailed,
   recordWebhookEvent,
 } from '$lib/server/services/purchase-processor';
 import { getStripe } from '$lib/server/stripe/client';
@@ -30,8 +32,12 @@ export async function POST(event: RequestEvent): Promise<Response> {
 
   if (stripeEvent.type === 'checkout.session.completed') {
     await processCheckoutCompleted(stripeEvent.id, stripeEvent.data.object);
+  } else if (stripeEvent.type === 'payment_intent.payment_failed') {
+    await processPaymentIntentFailed(stripeEvent.id, stripeEvent.data.object);
   } else if (stripeEvent.type === 'charge.refunded') {
     await processChargeRefunded(stripeEvent.id, stripeEvent.data.object);
+  } else if (stripeEvent.type === 'charge.dispute.created') {
+    await processDisputeCreated(stripeEvent.id, stripeEvent.data.object);
   }
 
   return new Response('ok');

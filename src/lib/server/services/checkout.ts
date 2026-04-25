@@ -63,6 +63,13 @@ export async function createCheckoutSession(event: RequestEvent, slug: string): 
         product_id: product.id,
         price_id: product.priceId,
       },
+      payment_intent_data: {
+        metadata: {
+          user_id: user.id,
+          product_id: product.id,
+          price_id: product.priceId,
+        },
+      },
     },
     {
       idempotencyKey: `checkout:${user.id}:${product.id}:${Date.now()}`,

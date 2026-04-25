@@ -279,3 +279,51 @@
 | v0.5.0 | 2026-04-24 | 4 | d004343 | Phase 4: RBAC and permissions complete |
 | v0.6.0 | 2026-04-24 | 5 | pending | Phase 5: Validation and security complete |
 | v1.0.0 | 2026-04-24 | 14 | 4b10d97 | Local v1 build complete |
+
+## 2026-04-25 Completion Addendum
+
+> Append-only continuation for the localhost completion pass after repository handoff.
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+| 1 | 2026-04-25 | 9 | `CHANGELOG.md` | b63d8cf | feat(billing): reconcile checkout outcomes |
+| 2 | 2026-04-25 | 9 | `src/lib/server/services/checkout.ts` | b63d8cf | feat(billing): reconcile checkout outcomes |
+| 3 | 2026-04-25 | 9 | `src/lib/server/services/purchase-processor.ts` | b63d8cf | feat(billing): reconcile checkout outcomes |
+| 4 | 2026-04-25 | 9 | `src/routes/api/webhooks/stripe/+server.ts` | b63d8cf | feat(billing): reconcile checkout outcomes |
+| 5 | 2026-04-25 | 11 | `src/routes/checkout/success/+page.server.ts` | b63d8cf | feat(billing): reconcile checkout outcomes |
+| 6 | 2026-04-25 | 11 | `src/routes/checkout/success/+page.svelte` | b63d8cf | feat(billing): reconcile checkout outcomes |
+| 7 | 2026-04-25 | 12 | `src/lib/schemas/auth.ts` | b97ded3 | feat(app): complete account and admin workflows |
+| 8 | 2026-04-25 | 12 | `src/routes/account/+page.server.ts` | b97ded3 | feat(app): complete account and admin workflows |
+| 9 | 2026-04-25 | 12 | `src/routes/account/+page.svelte` | b97ded3 | feat(app): complete account and admin workflows |
+| 10 | 2026-04-25 | 12 | `src/routes/account/security/+page.server.ts` | b97ded3 | feat(app): complete account and admin workflows |
+| 11 | 2026-04-25 | 12 | `src/routes/account/security/+page.svelte` | b97ded3 | feat(app): complete account and admin workflows |
+| 12 | 2026-04-25 | 13 | `src/routes/admin/audit-log/+page.server.ts` | b97ded3 | feat(app): complete account and admin workflows |
+| 13 | 2026-04-25 | 13 | `src/routes/admin/audit-log/+page.svelte` | b97ded3 | feat(app): complete account and admin workflows |
+| 14 | 2026-04-25 | 13 | `src/routes/admin/purchases/+page.server.ts` | b97ded3 | feat(app): complete account and admin workflows |
+| 15 | 2026-04-25 | 13 | `src/routes/admin/purchases/+page.svelte` | b97ded3 | feat(app): complete account and admin workflows |
+| 16 | 2026-04-25 | 3 | `src/routes/auth/verify-email/[token]/+page.server.ts` | b97ded3 | feat(app): complete account and admin workflows |
+| 17 | 2026-04-25 | 11 | `src/routes/legal/privacy/+page.svelte` | b97ded3 | feat(app): complete account and admin workflows |
+| 18 | 2026-04-25 | 11 | `src/routes/legal/refunds/+page.svelte` | b97ded3 | feat(app): complete account and admin workflows |
+| 19 | 2026-04-25 | 11 | `src/routes/legal/terms/+page.svelte` | b97ded3 | feat(app): complete account and admin workflows |
+| 20 | 2026-04-25 | 3 | `src/routes/verify-email/+page.server.ts` | b97ded3 | feat(app): complete account and admin workflows |
+| 21 | 2026-04-25 | 14 | `docs/runbooks/final-verification.md` | f6eb784 | docs(runbooks): finalize localhost verification |
+| 22 | 2026-04-25 | 14 | `docs/runbooks/local-development.md` | f6eb784 | docs(runbooks): finalize localhost verification |
+| 23 | 2026-04-25 | 14 | `docs/runbooks/refund-process.md` | f6eb784 | docs(runbooks): finalize localhost verification |
+| 24 | 2026-04-25 | 14 | `docs/runbooks/stripe-testing.md` | f6eb784 | docs(runbooks): finalize localhost verification |
+| 25 | 2026-04-25 | 14 | `docs/runbooks/stripe-webhook-replay.md` | f6eb784 | docs(runbooks): finalize localhost verification |
+| 26 | 2026-04-25 | 14 | `drizzle/env.ts` | f6eb784 | docs(runbooks): finalize localhost verification |
+| 27 | 2026-04-25 | 14 | `src/lib/server/db/index.ts` | f6eb784 | docs(runbooks): finalize localhost verification |
+| 28 | 2026-04-25 | 14 | `.github/workflows/ci.yml` | c09a135 | test(e2e): add browser smoke coverage |
+| 29 | 2026-04-25 | 14 | `playwright.config.ts` | c09a135 | test(e2e): add browser smoke coverage |
+| 30 | 2026-04-25 | 14 | `tests/app.e2e.ts` | c09a135 | test(e2e): add browser smoke coverage |
+| 31 | 2026-04-25 | 11 | `src/lib/server/errors.ts` | c09a135 | test(e2e): add browser smoke coverage |
+| 32 | 2026-04-25 | 11 | `src/lib/server/services/checkout.ts` | c09a135 | test(e2e): add browser smoke coverage |
+| 33 | 2026-04-25 | 14 | `package.json` | c09a135 | test(e2e): add browser smoke coverage |
+
+## Latest Verification
+
+| Date | Scope | Result |
+|---|---|---|
+| 2026-04-25 | `pnpm run ci` | Passed locally: lint, Svelte check, Vitest, production build |
+| 2026-04-25 | `pnpm test:e2e` | Passed locally: Playwright Chromium storefront, auth, admin, account, library smoke |
+| 2026-04-25 | GitHub Actions | Browser smoke added to CI with Postgres service and Playwright Chromium install |

@@ -7,6 +7,26 @@ Semantic Versioning after `v1.0.0`.
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-04-24
+
+### Added
+
+- Added Valibot auth schemas, centralized application errors, CSP headers, and
+  optional Upstash-backed rate limit helpers.
+
+## [0.5.0] - 2026-04-24
+
+### Added
+
+- Added RBAC permission checks and admin route guarding.
+
+## [0.4.0] - 2026-04-24
+
+### Added
+
+- Added Better Auth with Drizzle, SvelteKit handler integration, password auth,
+  magic links, password reset, and local auth pages.
+
 ## [0.3.0] - 2026-04-24
 
 ### Added

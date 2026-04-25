@@ -16,15 +16,15 @@
 
 - Products, prices, roles, permissions, personas, and sample purchases.
 
-## Phase 3: Authentication
+## Phase 3: Authentication - Complete
 
 - Better Auth email/password, magic links, verification, and password reset.
 
-## Phase 4: RBAC & Permissions
+## Phase 4: RBAC & Permissions - Complete
 
 - Server permission model and route guards.
 
-## Phase 5: Validation & Security
+## Phase 5: Validation & Security - Complete
 
 - Valibot schemas, rate limiting, CSP, and centralized errors.
 

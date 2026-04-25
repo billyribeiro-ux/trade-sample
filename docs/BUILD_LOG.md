@@ -108,6 +108,39 @@
 | 17 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | 9a21002 | chore(release): prepare v0.3.0 |
 | 18 | 2026-04-24 | 2 | `package.json` | 9a21002 | chore(release): prepare v0.3.0 |
 
+## Phase 3 - Authentication
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+## Phase 4 - RBAC & Permissions
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+## Phase 5 - Validation & Security
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+| 1 | 2026-04-24 | 5 | `package.json` | d004343 | feat(auth): add authentication and security foundation |
+| 2 | 2026-04-24 | 5 | `pnpm-lock.yaml` | d004343 | feat(auth): add authentication and security foundation |
+| 3 | 2026-04-24 | 5 | `src/app.d.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 4 | 2026-04-24 | 5 | `src/hooks.server.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 5 | 2026-04-24 | 5 | `src/lib/auth/client.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 6 | 2026-04-24 | 5 | `src/lib/schemas/auth.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 7 | 2026-04-24 | 5 | `src/lib/server/auth/index.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 8 | 2026-04-24 | 5 | `src/lib/server/auth/rbac.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 9 | 2026-04-24 | 5 | `src/lib/server/db/index.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 10 | 2026-04-24 | 5 | `src/lib/server/errors.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 11 | 2026-04-24 | 5 | `src/lib/server/security/rate-limit.ts` | d004343 | feat(auth): add authentication and security foundation |
+| 12 | 2026-04-24 | 5 | `src/routes/auth/forgot-password/+page.svelte` | d004343 | feat(auth): add authentication and security foundation |
+| 13 | 2026-04-24 | 5 | `src/routes/auth/magic-link/+page.svelte` | d004343 | feat(auth): add authentication and security foundation |
+| 14 | 2026-04-24 | 5 | `src/routes/auth/reset-password/+page.svelte` | d004343 | feat(auth): add authentication and security foundation |
+| 15 | 2026-04-24 | 5 | `src/routes/auth/sign-in/+page.svelte` | d004343 | feat(auth): add authentication and security foundation |
+| 16 | 2026-04-24 | 5 | `src/routes/auth/sign-up/+page.svelte` | d004343 | feat(auth): add authentication and security foundation |
+| 17 | 2026-04-24 | 5 | `tsconfig.json` | d004343 | feat(auth): add authentication and security foundation |
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |
@@ -115,3 +148,6 @@
 | v0.1.0 | 2026-04-24 | 0 | f760459 | Phase 0: Foundation and app scaffold complete |
 | v0.2.0 | 2026-04-24 | 1 | 3f630a3 | Phase 1: Database schema complete |
 | v0.3.0 | 2026-04-24 | 2 | 9a21002 | Phase 2: Database seeding complete |
+| v0.4.0 | 2026-04-24 | 3 | d004343 | Phase 3: Authentication complete |
+| v0.5.0 | 2026-04-24 | 4 | d004343 | Phase 4: RBAC and permissions complete |
+| v0.6.0 | 2026-04-24 | 5 | pending | Phase 5: Validation and security complete |

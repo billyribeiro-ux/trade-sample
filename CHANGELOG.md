@@ -7,6 +7,17 @@ Semantic Versioning after `v1.0.0`.
 
 ## [Unreleased]
 
+### Added
+
+- Added Docker Compose local Postgres on host port `55432` with `pnpm db:up`
+  and `pnpm db:down` scripts.
+- Added programmatic Drizzle migration script for reliable localhost migrations.
+
+### Changed
+
+- Switched runtime and seed database clients to the standard Postgres driver so
+  local Postgres and hosted Postgres URLs share the same path.
+
 ## [1.0.0] - 2026-04-24
 
 ### Added

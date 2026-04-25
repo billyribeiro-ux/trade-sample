@@ -28,6 +28,9 @@ library backed by server-authorized downloads.
 ```bash
 pnpm install
 cp .env.example .env
+pnpm db:up
+pnpm db:migrate
+pnpm db:seed
 pnpm dev
 ```
 
@@ -42,4 +45,3 @@ Local development runs at `http://localhost:5173`.
 - Authorize every protected download server-side.
 - Log all security, billing, entitlement, and admin actions.
 - Respect the product vision in `TRADING_STORE_VISION.md`.
-

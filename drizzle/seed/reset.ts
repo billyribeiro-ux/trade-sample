@@ -1,6 +1,6 @@
 import { sql } from 'drizzle-orm';
 
-import { seedDb } from './db';
+import { closeSeedDbConnection, seedDb } from './db';
 
 const tables = [
   'audit_log',
@@ -25,5 +25,9 @@ export async function resetDatabase(): Promise<void> {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  await resetDatabase();
+  try {
+    await resetDatabase();
+  } finally {
+    await closeSeedDbConnection();
+  }
 }

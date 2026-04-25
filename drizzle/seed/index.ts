@@ -1,3 +1,4 @@
+import { closeSeedDbConnection } from './db';
 import { seedPermissions } from './permissions';
 import { seedPersonas, seedPassword } from './personas';
 import { seedProducts } from './products';
@@ -12,4 +13,8 @@ async function main(): Promise<void> {
   console.log(`Seed complete. Test password for seeded users: ${seedPassword}`);
 }
 
-await main();
+try {
+  await main();
+} finally {
+  await closeSeedDbConnection();
+}

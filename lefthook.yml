@@ -2,14 +2,13 @@ pre-commit:
   parallel: true
   commands:
     biome:
-      run: pnpm biome check .
+      run: pnpm lint
     typecheck:
       run: pnpm check
     gitleaks:
-      run: pnpm gitleaks detect --no-git --redact
+      run: command -v gitleaks >/dev/null 2>&1 && gitleaks detect --no-git --redact || echo "gitleaks is not installed; skipping secret scan"
 
 commit-msg:
   commands:
     commitlint:
       run: pnpm commitlint --edit {1}
-

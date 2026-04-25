@@ -1,44 +1,13 @@
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { existsSync, readFileSync } from 'node:fs';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
 import * as schema from '../../src/lib/server/db/schema';
+import { getDatabaseUrl } from '../env';
 
-function loadLocalEnv(): void {
-  if (!existsSync('.env')) {
-    return;
-  }
+const queryClient = postgres(getDatabaseUrl(), { prepare: false });
 
-  const lines = readFileSync('.env', 'utf8').split('\n');
+export const seedDb = drizzle(queryClient, { schema });
 
-  for (const line of lines) {
-    const trimmed = line.trim();
-
-    if (!trimmed || trimmed.startsWith('#')) {
-      continue;
-    }
-
-    const separatorIndex = trimmed.indexOf('=');
-
-    if (separatorIndex === -1) {
-      continue;
-    }
-
-    const key = trimmed.slice(0, separatorIndex);
-    const value = trimmed.slice(separatorIndex + 1).replace(/^"|"$/g, '');
-
-    process.env[key] ??= value;
-  }
+export async function closeSeedDbConnection(): Promise<void> {
+  await queryClient.end();
 }
-
-loadLocalEnv();
-
-const databaseUrl = process.env.DATABASE_URL;
-
-if (!databaseUrl) {
-  throw new Error('DATABASE_URL is required. Add it to .env before running seed scripts.');
-}
-
-const sql = neon(databaseUrl);
-
-export const seedDb = drizzle(sql, { schema });

@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 
 import { prices, products } from '../../src/lib/server/db/schema';
 import { getStripe } from '../../src/lib/server/stripe/client';
-import { seedDb } from './db';
+import { closeSeedDbConnection, seedDb } from './db';
 
 async function main(): Promise<void> {
   const stripe = getStripe();
@@ -60,4 +60,8 @@ async function main(): Promise<void> {
   }
 }
 
-await main();
+try {
+  await main();
+} finally {
+  await closeSeedDbConnection();
+}

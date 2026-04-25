@@ -14,9 +14,9 @@ function securityHeaders(headers: Headers): void {
     [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' js.stripe.com",
-      "style-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: *.public.blob.vercel-storage.com",
-      "font-src 'self'",
+      "font-src 'self' https://fonts.gstatic.com",
       "connect-src 'self' api.stripe.com api.resend.com *.upstash.io",
       'frame-src js.stripe.com hooks.stripe.com',
       "base-uri 'self'",

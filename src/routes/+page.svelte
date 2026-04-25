@@ -14,10 +14,10 @@
   <meta name="description" content="A premium digital storefront for serious trading education." />
 </svelte:head>
 
-<main class="shell">
+<main class="shell container">
   <section class="hero" aria-labelledby="page-title">
     <p class="eyebrow">The Trading Store</p>
-    <h1 id="page-title">Master the markets. Trade with conviction.</h1>
+    <h1 id="page-title">Master the markets.<br/><span class="text-gradient">Trade with conviction.</span></h1>
     <p class="lede">
       A focused digital bookstore for premium trading material. Two books, real prices,
       secure checkout, and private library access after purchase.
@@ -38,12 +38,17 @@
     <section class="books" aria-label="Books">
       {#each data.products as product}
         <a class="book-card" href={`/books/${product.slug}`}>
-          <div class="cover">{product.name}</div>
-          <div>
+          <div class="cover">
+            <div class="cover-glow"></div>
+            <span>{product.name}</span>
+          </div>
+          <div class="book-info">
             <h2>{product.name}</h2>
             <p>{product.description}</p>
-            <strong>{formatPrice(product.amountCents)}</strong>
-            <span>Learn more -&gt;</span>
+            <div class="book-meta">
+              <strong>{formatPrice(product.amountCents)}</strong>
+              <span class="learn-more">Learn more &rarr;</span>
+            </div>
           </div>
         </a>
       {/each}
@@ -51,61 +56,86 @@
   {/if}
 
   <section class="trust" aria-label="Trust">
-    <p>Lifetime access</p>
-    <p>Secure checkout via Stripe</p>
-    <p>Instant download after purchase</p>
+    <div class="trust-badge">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      <span>Lifetime access</span>
+    </div>
+    <div class="trust-badge">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <span>Secure checkout via Stripe</span>
+    </div>
+    <div class="trust-badge">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      <span>Instant download after purchase</span>
+    </div>
   </section>
 </main>
 
 <style>
   .shell {
     display: grid;
-    gap: clamp(3rem, 8vw, 7rem);
-    padding: clamp(2rem, 6vw, 6rem);
+    gap: clamp(4rem, 10vw, 8rem);
+    padding-block: clamp(4rem, 10vw, 8rem);
+    animation: fade-in-up 0.8s var(--transition-bounce) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .hero {
-    inline-size: min(100%, 68rem);
+    max-width: 68rem;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .eyebrow {
-    margin: 0 0 1rem;
-    color: oklch(70% 0.018 255);
+    margin: 0 0 1.5rem;
+    color: var(--color-primary);
     font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--color-primary-glow);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
   }
 
   h1 {
-    max-inline-size: 13ch;
     margin: 0;
-    font-size: clamp(3rem, 2.2rem + 3vw, 5.5rem);
-    line-height: 0.95;
-    letter-spacing: 0;
+    font-size: clamp(2.5rem, 4vw + 1rem, 5.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   .lede {
-    max-inline-size: 42rem;
+    max-width: 42rem;
     margin: 1.5rem 0 0;
-    color: oklch(70% 0.018 255);
+    color: var(--color-text-secondary);
     font-size: clamp(1.125rem, 1.06rem + 0.26vw, 1.25rem);
     line-height: 1.6;
   }
 
   .books {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+    gap: 2rem;
   }
 
   .setup {
     display: grid;
-    gap: 1rem;
-    inline-size: min(100%, 52rem);
-    padding: 1.25rem;
-    border: 1px solid oklch(37% 0.052 80);
-    border-radius: 8px;
-    background: oklch(21% 0.032 80);
+    gap: 1.5rem;
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid var(--color-warning, #f59e0b);
+    border-radius: var(--radius-lg);
+    background: rgba(245, 158, 11, 0.1);
   }
 
   .setup p,
@@ -115,72 +145,173 @@
 
   .setup ol {
     display: grid;
-    gap: 0.5rem;
-    padding-inline-start: 1.25rem;
-    color: oklch(78% 0.02 80);
+    gap: 0.75rem;
+    padding-inline-start: 1.5rem;
+    color: var(--color-text-secondary);
     line-height: 1.5;
   }
 
   code {
-    color: oklch(88% 0.04 80);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    color: var(--color-primary-hover);
+    font-family: var(--font-mono);
     font-size: 0.9em;
+    background: rgba(0,0,0,0.3);
+    padding: 0.1rem 0.3rem;
+    border-radius: var(--radius-sm);
   }
 
   .book-card {
     display: grid;
-    grid-template-columns: 8rem 1fr;
-    gap: 1.25rem;
-    padding: 1rem;
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 8px;
-    background: oklch(17% 0.026 260);
+    grid-template-columns: 10rem 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: var(--color-bg-surface);
     text-decoration: none;
-    transition:
-      transform 200ms cubic-bezier(0.32, 0.72, 0, 1),
-      border-color 200ms cubic-bezier(0.32, 0.72, 0, 1);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-glow);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    pointer-events: none;
   }
 
   .book-card:hover {
-    border-color: oklch(64% 0.18 255);
-    transform: translateY(-2px);
+    border-color: var(--color-border-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    background: var(--color-bg-elevated);
+  }
+
+  .book-card:hover::before {
+    opacity: 1;
   }
 
   .cover {
     display: grid;
-    min-block-size: 11rem;
+    min-block-size: 14rem;
     place-items: center;
-    border-radius: 6px;
-    background: oklch(21% 0.028 260);
-    color: oklch(70% 0.018 255);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-base);
+    color: var(--color-text-muted);
     font-weight: 700;
+    font-family: var(--font-display);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
   }
 
-  h2,
-  .book-card p {
-    margin: 0 0 0.75rem;
+  .cover-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent 0%, var(--color-primary-glow) 50%, transparent 100%);
+    animation: rotate 10s linear infinite;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .book-card:hover .cover-glow {
+    opacity: 1;
+  }
+
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .cover span {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 1rem;
+    background: var(--color-bg-base);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+  }
+
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
   }
 
   .book-card p {
-    color: oklch(70% 0.018 255);
+    margin: 0 0 1.5rem;
+    color: var(--color-text-secondary);
     line-height: 1.5;
   }
 
-  strong {
-    display: block;
-    margin-block: 1rem;
-    font-size: 1.5rem;
-    font-variant-numeric: tabular-nums;
+  .book-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
   }
 
-  span {
-    color: oklch(70% 0.18 255);
+  strong {
+    font-size: 1.5rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-primary);
+  }
+
+  .learn-more {
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: transform var(--transition-fast);
+  }
+
+  .book-card:hover .learn-more {
+    transform: translateX(4px);
   }
 
   .trust {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 1rem;
-    color: oklch(70% 0.018 255);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    color: var(--color-text-secondary);
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+  }
+
+  .trust-badge svg {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 48rem) {
+    .book-card {
+      grid-template-columns: 1fr;
+    }
+    .cover {
+      min-block-size: 16rem;
+    }
   }
 </style>

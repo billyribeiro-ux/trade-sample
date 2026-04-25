@@ -1,4 +1,5 @@
 <script lang="ts">
+  import '../app.css';
   import favicon from '$lib/assets/favicon.svg';
   import type { Snippet } from 'svelte';
 
@@ -11,14 +12,14 @@
 </svelte:head>
 
 <a class="skip" href="#content">Skip to content</a>
-<header class="site-header">
+<header class="site-header glass">
   <a class="brand" href="/">The Trading Store</a>
   <nav aria-label="Primary">
-    <a href="/library">Library</a>
+    <a href="/library" class="nav-link">Library</a>
     {#if data.user}
-      <a href="/account">Account</a>
+      <a href="/account" class="nav-link">Account</a>
     {:else}
-      <a href="/auth/sign-in">Sign in</a>
+      <a href="/auth/sign-in" class="nav-link btn btn-primary">Sign in</a>
     {/if}
   </nav>
 </header>
@@ -40,40 +41,17 @@
 </footer>
 
 <style>
-  :global(body) {
-    margin: 0;
-    min-block-size: 100vh;
-    color: oklch(93% 0.012 255);
-    background: oklch(13% 0.025 260);
-    font-family:
-      Inter,
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
-  }
-
-  :global(a) {
-    color: inherit;
-  }
-
-  :global(:focus-visible) {
-    outline: 2px solid oklch(72% 0.18 255);
-    outline-offset: 2px;
-  }
-
   .skip {
     position: absolute;
     inset-block-start: 1rem;
     inset-inline-start: 1rem;
-    z-index: 10;
+    z-index: 100;
     transform: translateY(-200%);
     padding: 0.5rem 0.75rem;
-    background: oklch(64% 0.18 255);
-    color: oklch(13% 0.025 260);
-    border-radius: 6px;
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-md);
+    font-weight: 500;
   }
 
   .skip:focus {
@@ -85,7 +63,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 1.25rem clamp(1rem, 4vw, 4rem);
-    border-block-end: 1px solid oklch(28% 0.028 260);
+    position: sticky;
+    top: 0;
+    z-index: 50;
   }
 
   .site-footer {
@@ -93,9 +73,10 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.25rem clamp(1rem, 4vw, 4rem);
-    border-block-start: 1px solid oklch(28% 0.028 260);
-    color: oklch(70% 0.018 255);
+    padding: 2rem clamp(1rem, 4vw, 4rem);
+    border-block-start: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    background: var(--color-bg-base);
   }
 
   .site-footer p {
@@ -104,19 +85,38 @@
   }
 
   .brand {
-    color: oklch(93% 0.012 255);
-    font-weight: 700;
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    font-size: 1.25rem;
+    font-weight: 800;
     text-decoration: none;
+    letter-spacing: -0.02em;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   nav {
     display: flex;
-    gap: 1rem;
-    color: oklch(70% 0.018 255);
-    font-size: 0.9rem;
+    gap: 1.5rem;
+    align-items: center;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
   }
 
-  nav a {
+  .nav-link {
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  nav a:not(.btn) {
     text-decoration: none;
   }
 
@@ -125,6 +125,7 @@
     .site-footer {
       align-items: flex-start;
       flex-direction: column;
+      gap: 1.5rem;
     }
   }
 </style>

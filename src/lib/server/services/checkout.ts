@@ -4,7 +4,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 import { db } from '$lib/server/db';
 import { users } from '$lib/server/db/schema';
-import { ValidationError } from '$lib/server/errors';
+import { AuthenticationError, ValidationError } from '$lib/server/errors';
 import { getActiveProductBySlug } from '$lib/server/services/products';
 import { getStripe } from '$lib/server/stripe/client';
 
@@ -16,7 +16,7 @@ export async function createCheckoutSession(event: RequestEvent, slug: string): 
   const user = event.locals.user;
 
   if (!user) {
-    throw new ValidationError('Sign in is required before checkout.');
+    throw new AuthenticationError('Sign in is required before checkout.');
   }
 
   const product = await getActiveProductBySlug(slug);

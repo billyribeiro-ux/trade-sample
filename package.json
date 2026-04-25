@@ -21,7 +21,7 @@
     "lint": "biome lint .",
     "test": "vitest run",
     "test:unit": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --project=chromium",
     "stripe:listen": "stripe listen --forward-to localhost:5173/api/webhooks/stripe",
     "stripe:sync": "tsx drizzle/seed/stripe-sync.ts",
     "ci": "pnpm lint && pnpm check && pnpm test && pnpm build"

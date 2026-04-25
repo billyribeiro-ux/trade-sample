@@ -13,6 +13,12 @@ export class ValidationError extends AppError {
   }
 }
 
+export class AuthenticationError extends AppError {
+  constructor(message = 'Sign in is required.') {
+    super(message, 401);
+  }
+}
+
 export class PermissionError extends AppError {
   constructor(message = 'You do not have permission to perform this action.') {
     super(message, 403);

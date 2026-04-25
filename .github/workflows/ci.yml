@@ -9,6 +9,26 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: trading_store
+          POSTGRES_PASSWORD: trading_store
+          POSTGRES_DB: trading_store
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U trading_store -d trading_store"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://trading_store:trading_store@127.0.0.1:55432/trading_store
+      DATABASE_URL_UNPOOLED: postgres://trading_store:trading_store@127.0.0.1:55432/trading_store
+      BETTER_AUTH_SECRET: ci-local-secret
+      BETTER_AUTH_URL: http://localhost:4173
+      PUBLIC_APP_URL: http://localhost:4173
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -32,6 +52,12 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Browser smoke
+        run: pnpm test:e2e
 
       - name: Build
         run: pnpm build

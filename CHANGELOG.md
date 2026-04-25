@@ -23,11 +23,16 @@ Semantic Versioning after `v1.0.0`.
   refund runbook coverage.
 - Defaulted app and database scripts to the Docker localhost Postgres URL when
   `DATABASE_URL` is absent.
+- Added Playwright browser smoke coverage for storefront, legal pages,
+  protected redirects, seeded admin sign-in, admin pages, account pages, and
+  member library routes.
 
 ### Changed
 
 - Switched runtime and seed database clients to the standard Postgres driver so
   local Postgres and hosted Postgres URLs share the same path.
+- Unauthenticated checkout now returns a `401` authentication error so the
+  product page redirects buyers into the sign-up flow correctly.
 
 ## [1.0.0] - 2026-04-24
 

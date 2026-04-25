@@ -103,10 +103,15 @@
 | 13 | 2026-04-24 | 2 | `drizzle/migrations/meta/_journal.json` | 12bca3b | style(db): format schema metadata |
 | 14 | 2026-04-24 | 2 | `src/lib/server/db/schema/auth.ts` | 12bca3b | style(db): format schema metadata |
 
+| 15 | 2026-04-24 | 2 | `CHANGELOG.md` | 9a21002 | chore(release): prepare v0.3.0 |
+| 16 | 2026-04-24 | 2 | `ROADMAP.md` | 9a21002 | chore(release): prepare v0.3.0 |
+| 17 | 2026-04-24 | 2 | `docs/BUILD_LOG.md` | 9a21002 | chore(release): prepare v0.3.0 |
+| 18 | 2026-04-24 | 2 | `package.json` | 9a21002 | chore(release): prepare v0.3.0 |
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |
 |---|---|---|---|---|
 | v0.1.0 | 2026-04-24 | 0 | f760459 | Phase 0: Foundation and app scaffold complete |
 | v0.2.0 | 2026-04-24 | 1 | 3f630a3 | Phase 1: Database schema complete |
-| v0.3.0 | 2026-04-24 | 2 | pending | Phase 2: Database seeding complete |
+| v0.3.0 | 2026-04-24 | 2 | 9a21002 | Phase 2: Database seeding complete |

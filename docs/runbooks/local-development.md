@@ -3,8 +3,11 @@
 ## Required Local Services
 
 The app runs on localhost and defaults to the local Postgres service in `docker-compose.yml`.
+Use pnpm through Corepack; the exact package manager version is declared once in
+`package.json`.
 
 ```bash
+corepack enable
 pnpm install
 cp .env.example .env
 pnpm db:up
@@ -32,7 +35,8 @@ TestPass!234
 
 ## Stripe Test Mode
 
-Use Stripe sandbox API keys in `.env`:
+Use Stripe test-mode API keys from the Stripe dashboard in `.env`. Do not use live
+keys for localhost.
 
 ```txt
 STRIPE_SECRET_KEY=sk_test_...
@@ -46,8 +50,26 @@ Start webhook forwarding in a second terminal:
 pnpm stripe:listen
 ```
 
-Use Stripe test cards only. The happy-path card is `4242 4242 4242 4242`;
-use any future expiration date and any three-digit CVC.
+Sync seeded products/prices to Stripe before checkout testing:
+
+```bash
+pnpm stripe:sync
+```
+
+Use Stripe test cards only. The happy-path card is `4242 4242 4242 4242`.
+Use any future expiration date, any three-digit CVC, and any postal code.
+
+## Local Smoke Path
+
+1. Sign in as the seeded admin user.
+2. Open `/admin/products` and confirm both books have Stripe price IDs after sync.
+3. Open `/books/<slug>`, start checkout, and pay with `4242 4242 4242 4242`.
+4. Wait for `checkout.session.completed` in the Stripe listener.
+5. Confirm `/checkout/success?session_id=...` resolves to the ready state.
+6. Confirm `/library` shows the purchased book and starts a signed download.
+7. Open `/admin/purchases`, filter by customer email, and confirm the purchase.
+8. Start a refund from `/admin/purchases` and wait for `charge.refunded`.
+9. Confirm the entitlement is revoked and `/admin/audit-log` records the events.
 
 ## Notes
 

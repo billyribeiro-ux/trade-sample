@@ -19,6 +19,10 @@ Semantic Versioning after `v1.0.0`.
 - Added editable account profile/password flows, active session revocation,
   admin purchase filters/refunds, audit-log filters, legal pages, and email
   verification redirect routes.
+- Added localhost final verification, Stripe test-mode, webhook replay, and
+  refund runbook coverage.
+- Defaulted app and database scripts to the Docker localhost Postgres URL when
+  `DATABASE_URL` is absent.
 
 ### Changed
 

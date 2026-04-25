@@ -36,6 +36,9 @@ pnpm dev
 
 Local development runs at `http://localhost:5173`.
 
+Detailed localhost, Stripe test-mode, refund, webhook replay, and final
+verification steps live in `docs/runbooks/`.
+
 ## Engineering Rules
 
 - Use `pnpm` only.

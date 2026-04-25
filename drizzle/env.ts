@@ -30,11 +30,7 @@ export function loadLocalEnv(): void {
 export function getDatabaseUrl(): string {
   loadLocalEnv();
 
-  const databaseUrl = process.env.DATABASE_URL;
-
-  if (!databaseUrl) {
-    throw new Error('DATABASE_URL is required. Add it to .env before running database scripts.');
-  }
-
-  return databaseUrl;
+  return (
+    process.env.DATABASE_URL ?? 'postgres://trading_store:trading_store@127.0.0.1:55432/trading_store'
+  );
 }

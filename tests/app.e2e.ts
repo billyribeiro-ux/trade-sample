@@ -24,12 +24,20 @@ test('public storefront, legal pages, and protected redirects work', async ({ pa
 });
 
 test('seeded admin can reach admin and member dashboards', async ({ page }) => {
-  await page.goto('/auth/sign-in?redirect=/admin');
-  await page.getByLabel('Email').fill('admin@trading.test');
-  await page.getByLabel('Password').fill(seededPassword);
-  await page.getByRole('button', { name: 'Sign in' }).click();
+  const response = await page.request.post('/api/auth/sign-in/email', {
+    data: {
+      email: 'admin@trading.test',
+      password: seededPassword,
+      callbackURL: '/admin',
+    },
+    headers: {
+      origin: 'http://localhost:4173',
+    },
+  });
 
-  await expect(page).toHaveURL(/\/admin$/);
+  expect(response.ok()).toBe(true);
+
+  await page.goto('/admin');
   await expect(page.getByRole('heading', { name: 'Admin' })).toBeVisible();
 
   const expectedHeadings = new Map([

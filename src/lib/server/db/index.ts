@@ -4,11 +4,7 @@ import { env } from '$env/dynamic/private';
 
 import * as schema from './schema';
 
-const databaseUrl = env.DATABASE_URL;
-
-if (!databaseUrl) {
-  throw new Error('DATABASE_URL is required to initialize the database client.');
-}
+const databaseUrl = env.DATABASE_URL ?? 'postgres://user:password@localhost:5432/trading_store';
 
 const sql = neon(databaseUrl);
 

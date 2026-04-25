@@ -1,5 +1,10 @@
 declare global {
-  namespace App {}
+  namespace App {
+    interface Locals {
+      session: import('$lib/server/auth').AuthSession['session'] | null;
+      user: import('$lib/server/auth').AuthSession['user'] | null;
+    }
+  }
 }
 
 export {};

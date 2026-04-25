@@ -31,6 +31,12 @@ export class RateLimitError extends AppError {
   }
 }
 
+export class ConfigurationError extends AppError {
+  constructor(message = 'The application is not fully configured.') {
+    super(message, 503);
+  }
+}
+
 export class EntitlementError extends AppError {
   constructor(message = 'You do not have access to this product.') {
     super(message, 403);

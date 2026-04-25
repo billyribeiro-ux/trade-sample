@@ -24,19 +24,31 @@
     </p>
   </section>
 
-  <section class="books" aria-label="Books">
-    {#each data.products as product}
-      <a class="book-card" href={`/books/${product.slug}`}>
-        <div class="cover">{product.name}</div>
-        <div>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <strong>{formatPrice(product.amountCents)}</strong>
-          <span>Learn more -></span>
-        </div>
-      </a>
-    {/each}
-  </section>
+  {#if data.setupRequired}
+    <section class="setup" aria-label="Local setup">
+      <p>{data.setupMessage}</p>
+      <ol>
+        <li>Copy <code>.env.example</code> to <code>.env</code>.</li>
+        <li>Add a Neon Postgres <code>DATABASE_URL</code> or compatible local Postgres URL.</li>
+        <li>Run <code>pnpm db:migrate</code> and <code>pnpm db:seed</code>.</li>
+        <li>Restart <code>pnpm dev -- --port 5173</code>.</li>
+      </ol>
+    </section>
+  {:else}
+    <section class="books" aria-label="Books">
+      {#each data.products as product}
+        <a class="book-card" href={`/books/${product.slug}`}>
+          <div class="cover">{product.name}</div>
+          <div>
+            <h2>{product.name}</h2>
+            <p>{product.description}</p>
+            <strong>{formatPrice(product.amountCents)}</strong>
+            <span>Learn more -&gt;</span>
+          </div>
+        </a>
+      {/each}
+    </section>
+  {/if}
 
   <section class="trust" aria-label="Trust">
     <p>Lifetime access</p>
@@ -84,6 +96,35 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
     gap: 1rem;
+  }
+
+  .setup {
+    display: grid;
+    gap: 1rem;
+    inline-size: min(100%, 52rem);
+    padding: 1.25rem;
+    border: 1px solid oklch(37% 0.052 80);
+    border-radius: 8px;
+    background: oklch(21% 0.032 80);
+  }
+
+  .setup p,
+  .setup ol {
+    margin: 0;
+  }
+
+  .setup ol {
+    display: grid;
+    gap: 0.5rem;
+    padding-inline-start: 1.25rem;
+    color: oklch(78% 0.02 80);
+    line-height: 1.5;
+  }
+
+  code {
+    color: oklch(88% 0.04 80);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+    font-size: 0.9em;
   }
 
   .book-card {

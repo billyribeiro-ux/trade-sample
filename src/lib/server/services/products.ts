@@ -1,10 +1,12 @@
 import { and, desc, eq, isNull } from 'drizzle-orm';
 
-import { db } from '$lib/server/db';
+import { assertDatabaseConfigured, db } from '$lib/server/db';
 import { prices, products } from '$lib/server/db/schema';
 import { NotFoundError } from '$lib/server/errors';
 
 export async function listActiveProducts() {
+  assertDatabaseConfigured();
+
   return db
     .select({
       id: products.id,
@@ -26,6 +28,8 @@ export async function listActiveProducts() {
 }
 
 export async function getActiveProductBySlug(slug: string) {
+  assertDatabaseConfigured();
+
   const [product] = await db
     .select({
       id: products.id,

@@ -55,7 +55,7 @@
       <span class="badge">Secure checkout</span>
     </p>
     <h1>{data.product.name}</h1>
-    <p class="subtitle text-gradient">Premium trading material for serious retail traders.</p>
+    <p class="subtitle">Premium trading material for serious retail traders.</p>
     <div class="description">
       <p>{data.product.description}</p>
       <p>
@@ -85,7 +85,7 @@
     grid-template-columns: minmax(18rem, 1fr) minmax(18rem, 1fr);
     gap: clamp(3rem, 8vw, 6rem);
     padding-block: clamp(3rem, 8vw, 6rem);
-    animation: fade-in-up 0.8s var(--transition-bounce) forwards;
+    animation: fade-in-up 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
 
   .cover-wrapper {
@@ -100,26 +100,33 @@
     aspect-ratio: 3/4;
     place-items: center;
     border-radius: var(--radius-xl);
-    background: var(--color-bg-surface);
+    background:
+      radial-gradient(120% 90% at 0% 0%, rgba(217, 119, 87, 0.22), transparent 55%),
+      radial-gradient(120% 90% at 100% 100%, rgba(180, 130, 100, 0.16), transparent 60%),
+      var(--color-bg-sunken);
     color: var(--color-text-primary);
     font-size: 2.5rem;
-    font-weight: 800;
+    font-weight: 700;
     font-family: var(--font-display);
+    letter-spacing: -0.02em;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--color-border);
-    box-shadow: var(--shadow-xl, 0 25px 50px -12px rgb(0 0 0 / 0.5));
+    box-shadow: var(--shadow-xl);
   }
 
   .cover-glow {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent 0%, var(--color-primary-glow) 50%, transparent 100%);
-    animation: rotate 15s linear infinite;
-    opacity: 0.8;
+    inset: -40%;
+    background: conic-gradient(from 0deg,
+      transparent 0%,
+      rgba(217, 119, 87, 0.22) 30%,
+      transparent 50%,
+      rgba(196, 101, 74, 0.18) 78%,
+      transparent 100%);
+    animation: rotate 22s linear infinite;
+    opacity: 0.55;
+    filter: blur(10px);
   }
 
   @keyframes rotate {
@@ -132,13 +139,7 @@
     z-index: 2;
     text-align: center;
     padding: 2rem;
-    background: var(--color-bg-base);
-    width: calc(100% - 4px);
-    height: calc(100% - 4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: calc(var(--radius-xl) - 2px);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   }
 
   .detail {
@@ -174,8 +175,10 @@
   }
 
   .subtitle {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-primary-hover);
+    letter-spacing: -0.005em;
   }
 
   .description {

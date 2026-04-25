@@ -55,7 +55,7 @@
     </section>
   {:else}
     <section class="book-grid">
-      {#each data.books as book}
+      {#each data.books as book (book.slug)}
         <article class="library-card">
           <div class="cover">
             <div class="cover-glow"></div>
@@ -98,7 +98,7 @@
     flex-direction: column;
     gap: 3rem;
     padding-block: clamp(3rem, 8vw, 6rem);
-    animation: fade-in-up 0.6s var(--transition-bounce) forwards;
+    animation: fade-in-up 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
 
   .library-header {
@@ -125,15 +125,15 @@
   }
 
   .alert-success {
-    background: rgba(16, 185, 129, 0.1);
+    background: var(--color-success-soft);
     color: var(--color-success);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    border: 1px solid var(--color-success-border);
   }
 
   .alert-error {
-    background: rgba(239, 68, 68, 0.1);
+    background: var(--color-danger-soft);
     color: var(--color-danger);
-    border: 1px solid rgba(239, 68, 68, 0.2);
+    border: 1px solid var(--color-danger-border);
   }
 
   .book-grid {
@@ -164,25 +164,33 @@
     min-block-size: 14rem;
     place-items: center;
     border-radius: var(--radius-md);
-    background: var(--color-bg-base);
-    color: var(--color-text-muted);
-    font-weight: 700;
+    background:
+      radial-gradient(120% 90% at 0% 0%, rgba(217, 119, 87, 0.18), transparent 55%),
+      radial-gradient(120% 90% at 100% 100%, rgba(180, 130, 100, 0.12), transparent 60%),
+      var(--color-bg-sunken);
+    color: var(--color-text-secondary);
+    font-weight: 600;
     font-family: var(--font-display);
+    letter-spacing: -0.01em;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-inset);
   }
 
   .cover-glow {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent 0%, var(--color-primary-glow) 50%, transparent 100%);
-    animation: rotate 10s linear infinite;
+    inset: -40%;
+    background: conic-gradient(from 0deg,
+      transparent 0%,
+      rgba(217, 119, 87, 0.18) 30%,
+      transparent 50%,
+      rgba(196, 101, 74, 0.14) 78%,
+      transparent 100%);
+    animation: rotate 18s linear infinite;
     opacity: 0;
-    transition: opacity var(--transition-normal);
+    transition: opacity var(--transition-slow);
+    filter: blur(8px);
   }
 
   .library-card:hover .cover-glow {
@@ -199,13 +207,7 @@
     z-index: 2;
     text-align: center;
     padding: 1rem;
-    background: var(--color-bg-base);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: inherit;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   }
 
   .card-content {
@@ -250,15 +252,15 @@
   }
 
   .badge-success {
-    background: rgba(16, 185, 129, 0.1);
+    background: var(--color-success-soft);
     color: var(--color-success);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    border: 1px solid var(--color-success-border);
   }
 
   .badge-warning {
-    background: rgba(245, 158, 11, 0.1);
-    color: #f59e0b;
-    border: 1px solid rgba(245, 158, 11, 0.2);
+    background: var(--color-warning-soft);
+    color: var(--color-warning);
+    border: 1px solid var(--color-warning-border);
   }
 
   .actions {

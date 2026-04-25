@@ -14,54 +14,52 @@
   <title>Audit log - The Trading Store</title>
 </svelte:head>
 
-<main class="page">
-  <header>
+<main class="page-shell">
+  <header class="page-header">
     <p class="eyebrow">Admin</p>
     <h1>Audit log</h1>
-    <p>Trace account, entitlement, purchase, and product operations.</p>
+    <p class="lede">Trace account, entitlement, purchase, and product operations.</p>
   </header>
 
-  <form class="filters" method="GET">
-    <label>
-      Search
+  <form class="filter-bar" method="GET">
+    <div class="form-group">
+      <span class="form-label">Search</span>
       <input name="q" placeholder="Action or actor email" value={data.filters.query} />
-    </label>
-    <label>
-      Resource
+    </div>
+    <div class="form-group">
+      <span class="form-label">Resource</span>
       <select name="resourceType">
         <option value="">All resources</option>
-        {#each data.resourceTypes as resourceType}
+        {#each data.resourceTypes as resourceType (resourceType)}
           <option value={resourceType} selected={data.filters.resourceType === resourceType}>
             {resourceType}
           </option>
         {/each}
       </select>
-    </label>
-    <button type="submit">Apply</button>
-    <a href="/admin/audit-log">Reset</a>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" type="submit">Apply</button>
+      <a class="btn btn-ghost" href="/admin/audit-log">Reset</a>
+    </div>
   </form>
 
   <section class="events" aria-label="Audit events">
     {#if data.events.length === 0}
-      <article>
+      <article class="surface empty">
         <h2>No events found</h2>
-        <p>Try a broader search.</p>
+        <p class="muted">Try a broader search.</p>
       </article>
     {:else}
-      {#each data.events as event}
-        <article>
-          <div>
+      {#each data.events as event (event.id)}
+        <article class="surface event">
+          <header class="event-head">
             <h2>{event.action}</h2>
-            <p>
+            <p class="muted event-meta">
               {formatDate(event.createdAt)}
-              {#if event.actorEmail}
-                · {event.actorEmail}
-              {/if}
-              {#if event.ipAddress}
-                · {event.ipAddress}
-              {/if}
+              {#if event.actorEmail}· {event.actorEmail}{/if}
+              {#if event.ipAddress}· {event.ipAddress}{/if}
             </p>
-          </div>
+          </header>
           <dl>
             <div>
               <dt>Resource</dt>
@@ -74,7 +72,7 @@
             {#if event.metadata}
               <div>
                 <dt>Metadata</dt>
-                <dd>{stringify(event.metadata)}</dd>
+                <dd><code>{stringify(event.metadata)}</code></dd>
               </div>
             {/if}
           </dl>
@@ -85,110 +83,56 @@
 </main>
 
 <style>
-  .page {
-    display: grid;
-    gap: 1.5rem;
-    padding: clamp(2rem, 6vw, 6rem);
-  }
-
-  h1,
-  h2,
-  p,
-  dl,
-  dd {
-    margin: 0;
-  }
-
-  header {
-    display: grid;
-    gap: 0.5rem;
-  }
-
-  header p,
-  article p,
-  label,
-  dt {
-    color: oklch(70% 0.018 255);
-  }
-
-  .eyebrow {
-    color: oklch(68% 0.14 150);
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 8px;
-    background: oklch(17% 0.026 260);
-  }
-
-  label {
-    display: grid;
-    gap: 0.4rem;
-    min-inline-size: min(100%, 17rem);
-    font-size: 0.9rem;
-  }
-
-  input,
-  select {
-    min-block-size: 2.5rem;
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 6px;
-    padding-inline: 0.75rem;
-    color: oklch(93% 0.012 255);
-    background: oklch(13% 0.025 260);
-    font: inherit;
-  }
-
-  button {
-    min-block-size: 2.5rem;
-    border: 0;
-    border-radius: 6px;
-    padding-inline: 1rem;
-    color: oklch(13% 0.025 260);
-    background: oklch(64% 0.18 255);
-    font: inherit;
-    font-weight: 700;
-  }
-
   .events {
     display: grid;
     gap: 1rem;
   }
 
-  article {
+  .empty h2 {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .event {
     display: grid;
     gap: 1rem;
-    padding: 1rem;
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 8px;
-    background: oklch(17% 0.026 260);
+  }
+
+  .event-head h2 {
+    font-size: 1.05rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .event-meta {
+    margin: 0;
+    font-size: 0.85rem;
   }
 
   dl {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-    gap: 0.75rem;
+    gap: 0.85rem;
+    margin: 0;
   }
 
   dt {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
   }
 
   dd {
-    margin-block-start: 0.25rem;
+    margin: 0;
+    color: var(--color-text-primary);
     overflow-wrap: anywhere;
   }
 
-  a {
-    color: oklch(70% 0.18 255);
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-text-secondary);
   }
 </style>

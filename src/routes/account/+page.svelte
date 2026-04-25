@@ -16,199 +16,127 @@
   <title>Account - The Trading Store</title>
 </svelte:head>
 
-<main class="page">
-  <header>
+<main class="page-shell">
+  <header class="page-header">
     <p class="eyebrow">Member dashboard</p>
     <h1>Account</h1>
-    <p>Manage your profile, password, receipts, downloads, and active sessions.</p>
+    <p class="lede">Manage your profile, password, receipts, downloads, and active sessions.</p>
   </header>
 
-  <section class="summary" aria-label="Account summary">
-    <article>
-      <span>{data.summary.activeEntitlements}</span>
-      <p>Active books</p>
+  <section class="stat-grid" aria-label="Account summary">
+    <article class="stat-card">
+      <span class="value">{data.summary.activeEntitlements}</span>
+      <span class="label">Active books</span>
     </article>
-    <article>
-      <span>{data.summary.totalPurchases}</span>
-      <p>Purchases</p>
+    <article class="stat-card">
+      <span class="value">{data.summary.totalPurchases}</span>
+      <span class="label">Purchases</span>
     </article>
-    <article>
-      <span>{data.summary.activeSessions}</span>
-      <p>Sessions</p>
+    <article class="stat-card">
+      <span class="value">{data.summary.activeSessions}</span>
+      <span class="label">Sessions</span>
     </article>
-    <article>
-      <span>{formatDate(data.summary.lastPurchaseAt)}</span>
-      <p>Last purchase</p>
+    <article class="stat-card">
+      <span class="value">{formatDate(data.summary.lastPurchaseAt)}</span>
+      <span class="label">Last purchase</span>
     </article>
   </section>
 
   <div class="grid">
-    <section>
-      <h2>Profile</h2>
-      <p class="muted">{data.profile?.email}</p>
-      <form method="POST" action="?/updateProfile">
-        <label>
-          Display name
+    <section class="surface card">
+      <header class="card-head">
+        <h2>Profile</h2>
+        <p class="muted">{data.profile?.email}</p>
+      </header>
+      <form method="POST" action="?/updateProfile" class="card-form">
+        <div class="form-group">
+          <span class="form-label">Display name</span>
           <input name="name" autocomplete="name" required maxlength="120" value={data.profile?.name ?? ''} />
-        </label>
+        </div>
 
         {#if form?.action === 'updateProfile' && form.error}
-          <p class="error" aria-live="polite">{form.error}</p>
+          <p class="error-text" aria-live="polite">{form.error}</p>
         {/if}
         {#if form?.action === 'updateProfile' && form.success}
-          <p class="success" aria-live="polite">{form.success}</p>
+          <p class="success-text" aria-live="polite">{form.success}</p>
         {/if}
 
-        <button type="submit">Save profile</button>
+        <button class="btn btn-primary btn-block" type="submit">Save profile</button>
       </form>
     </section>
 
-    <section>
-      <h2>Password</h2>
-      <p class="muted">Use a unique password with at least 12 characters.</p>
-      <form method="POST" action="?/changePassword">
-        <label>
-          Current password
+    <section class="surface card">
+      <header class="card-head">
+        <h2>Password</h2>
+        <p class="muted">Use a unique password with at least 12 characters.</p>
+      </header>
+      <form method="POST" action="?/changePassword" class="card-form">
+        <div class="form-group">
+          <span class="form-label">Current password</span>
           <input name="currentPassword" autocomplete="current-password" required minlength="12" type="password" />
-        </label>
-        <label>
-          New password
+        </div>
+        <div class="form-group">
+          <span class="form-label">New password</span>
           <input name="newPassword" autocomplete="new-password" required minlength="12" type="password" />
-        </label>
-        <label>
-          Confirm new password
+        </div>
+        <div class="form-group">
+          <span class="form-label">Confirm new password</span>
           <input name="confirmPassword" autocomplete="new-password" required minlength="12" type="password" />
-        </label>
+        </div>
 
         {#if form?.action === 'changePassword' && form.error}
-          <p class="error" aria-live="polite">{form.error}</p>
+          <p class="error-text" aria-live="polite">{form.error}</p>
         {/if}
         {#if form?.action === 'changePassword' && form.success}
-          <p class="success" aria-live="polite">{form.success}</p>
+          <p class="success-text" aria-live="polite">{form.success}</p>
         {/if}
 
-        <button type="submit">Change password</button>
+        <button class="btn btn-primary btn-block" type="submit">Change password</button>
       </form>
     </section>
   </div>
 
-  <nav class="links" aria-label="Account sections">
-    <a href="/library">Library</a>
-    <a href="/account/purchases">Purchases</a>
-    <a href="/account/security">Security</a>
+  <nav class="quick-links" aria-label="Account sections">
+    <a class="link" href="/library">Library →</a>
+    <a class="link" href="/account/purchases">Purchases →</a>
+    <a class="link" href="/account/security">Security →</a>
   </nav>
 </main>
 
 <style>
-  .page {
+  .grid {
     display: grid;
     gap: 1.5rem;
-    padding: clamp(2rem, 6vw, 6rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
   }
 
-  h1,
-  h2,
-  p {
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .card-head h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.2rem;
+  }
+
+  .card-head p {
     margin: 0;
-  }
-
-  header {
-    display: grid;
-    gap: 0.5rem;
-    max-inline-size: 52rem;
-  }
-
-  header p,
-  .muted,
-  label,
-  .links {
-    color: oklch(70% 0.018 255);
-  }
-
-  .eyebrow {
-    color: oklch(68% 0.14 150);
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .summary,
-  .grid {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .summary {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  }
-
-  .grid {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
-  }
-
-  section,
-  .summary article {
-    padding: 1rem;
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 8px;
-    background: oklch(17% 0.026 260);
-  }
-
-  .summary article {
-    display: grid;
-    gap: 0.25rem;
-  }
-
-  .summary span {
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
-    font-weight: 800;
-  }
-
-  section,
-  form {
-    display: grid;
-    gap: 1rem;
-  }
-
-  label {
-    display: grid;
-    gap: 0.45rem;
     font-size: 0.9rem;
   }
 
-  input {
-    min-block-size: 2.75rem;
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 6px;
-    padding-inline: 0.875rem;
-    color: oklch(93% 0.012 255);
-    background: oklch(13% 0.025 260);
-    font: inherit;
-  }
-
-  button {
-    min-block-size: 2.75rem;
-    border: 0;
-    border-radius: 6px;
-    padding-inline: 1rem;
-    color: oklch(13% 0.025 260);
-    background: oklch(64% 0.18 255);
-    font: inherit;
-    font-weight: 700;
-  }
-
-  .links {
+  .card-form {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 1rem;
   }
 
-  a,
-  .success {
-    color: oklch(70% 0.18 255);
-  }
-
-  .error {
-    color: oklch(64% 0.18 25);
+  .quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border);
   }
 </style>

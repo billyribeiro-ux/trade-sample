@@ -36,7 +36,7 @@
     </section>
   {:else}
     <section class="books" aria-label="Books">
-      {#each data.products as product}
+      {#each data.products as product (product.slug)}
         <a class="book-card" href={`/books/${product.slug}`}>
           <div class="cover">
             <div class="cover-glow"></div>
@@ -74,14 +74,13 @@
 <style>
   .shell {
     display: grid;
-    gap: clamp(4rem, 10vw, 8rem);
-    padding-block: clamp(4rem, 10vw, 8rem);
-    animation: fade-in-up 0.8s var(--transition-bounce) forwards;
-    opacity: 0;
+    gap: clamp(4rem, 9vw, 7rem);
+    padding-block: clamp(3.5rem, 8vw, 6.5rem);
+    animation: fade-in-up 0.65s var(--ease-out) both;
   }
 
   @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
@@ -94,37 +93,33 @@
     align-items: center;
   }
 
-  .eyebrow {
-    margin: 0 0 1.5rem;
-    color: var(--color-primary);
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    background: var(--color-primary-glow);
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-full);
+  .hero .eyebrow {
+    margin: 0 0 1.75rem;
+    animation: fade-in-up 0.6s var(--ease-out) 0.05s both;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2.5rem, 4vw + 1rem, 5.5rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.5rem, 4vw + 1rem, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    animation: fade-in-up 0.7s var(--ease-out) 0.12s both;
   }
 
   .lede {
     max-width: 42rem;
     margin: 1.5rem 0 0;
     color: var(--color-text-secondary);
-    font-size: clamp(1.125rem, 1.06rem + 0.26vw, 1.25rem);
-    line-height: 1.6;
+    font-size: clamp(1.05rem, 1rem + 0.26vw, 1.2rem);
+    line-height: 1.65;
+    animation: fade-in-up 0.7s var(--ease-out) 0.2s both;
   }
 
   .books {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
-    gap: 2rem;
+    gap: 1.75rem;
+    animation: fade-in-up 0.7s var(--ease-out) 0.28s both;
   }
 
   .setup {
@@ -133,9 +128,9 @@
     max-width: 52rem;
     margin: 0 auto;
     padding: 2rem;
-    border: 1px solid var(--color-warning, #f59e0b);
+    border: 1px solid var(--color-warning-border);
     border-radius: var(--radius-lg);
-    background: rgba(245, 158, 11, 0.1);
+    background: var(--color-warning-soft);
   }
 
   .setup p,
@@ -163,15 +158,18 @@
   .book-card {
     display: grid;
     grid-template-columns: 10rem 1fr;
-    gap: 1.5rem;
+    gap: 1.75rem;
     padding: 1.5rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-    background: var(--color-bg-surface);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 40%),
+      var(--color-bg-surface);
     text-decoration: none;
-    transition: all var(--transition-normal);
+    transition: transform var(--transition-normal), border-color var(--transition-fast),
+      box-shadow var(--transition-normal);
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-xs), var(--shadow-inset);
   }
 
   .book-card::before {
@@ -180,15 +178,14 @@
     inset: 0;
     background: var(--gradient-glow);
     opacity: 0;
-    transition: opacity var(--transition-normal);
+    transition: opacity var(--transition-slow);
     pointer-events: none;
   }
 
   .book-card:hover {
     border-color: var(--color-border-hover);
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
-    background: var(--color-bg-elevated);
   }
 
   .book-card:hover::before {
@@ -200,25 +197,33 @@
     min-block-size: 14rem;
     place-items: center;
     border-radius: var(--radius-md);
-    background: var(--color-bg-base);
-    color: var(--color-text-muted);
-    font-weight: 700;
+    background:
+      radial-gradient(120% 90% at 0% 0%, rgba(217, 119, 87, 0.18), transparent 55%),
+      radial-gradient(120% 90% at 100% 100%, rgba(180, 130, 100, 0.12), transparent 60%),
+      var(--color-bg-sunken);
+    color: var(--color-text-secondary);
+    font-weight: 600;
     font-family: var(--font-display);
+    letter-spacing: -0.01em;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-inset);
   }
 
   .cover-glow {
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent 0%, var(--color-primary-glow) 50%, transparent 100%);
-    animation: rotate 10s linear infinite;
+    inset: -40%;
+    background: conic-gradient(from 0deg,
+      transparent 0%,
+      rgba(217, 119, 87, 0.18) 30%,
+      transparent 50%,
+      rgba(196, 101, 74, 0.14) 78%,
+      transparent 100%);
+    animation: rotate 18s linear infinite;
     opacity: 0;
-    transition: opacity var(--transition-normal);
+    transition: opacity var(--transition-slow);
+    filter: blur(8px);
   }
 
   .book-card:hover .cover-glow {
@@ -234,14 +239,9 @@
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 1rem;
-    background: var(--color-bg-base);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: inherit;
+    padding: 1.25rem;
+    font-size: 1.05rem;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   }
 
   .book-info {
@@ -276,13 +276,17 @@
   }
 
   .learn-more {
-    color: var(--color-primary);
-    font-weight: 600;
-    transition: transform var(--transition-fast);
+    color: var(--color-primary-hover);
+    font-weight: 500;
+    transition: transform var(--transition-fast), color var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .book-card:hover .learn-more {
-    transform: translateX(4px);
+    transform: translateX(3px);
+    color: var(--color-primary);
   }
 
   .trust {
@@ -291,8 +295,9 @@
     justify-content: center;
     gap: 3rem;
     color: var(--color-text-secondary);
-    padding-top: 2rem;
+    padding-top: 2.5rem;
     border-top: 1px solid var(--color-border);
+    animation: fade-in-up 0.7s var(--ease-out) 0.36s both;
   }
 
   .trust-badge {
@@ -300,10 +305,12 @@
     align-items: center;
     gap: 0.75rem;
     font-weight: 500;
+    font-size: 0.95rem;
   }
 
   .trust-badge svg {
     color: var(--color-primary);
+    opacity: 0.85;
   }
 
   @media (max-width: 48rem) {

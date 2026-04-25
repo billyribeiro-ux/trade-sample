@@ -62,7 +62,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.25rem clamp(1rem, 4vw, 4rem);
+    padding: 1.1rem clamp(1rem, 4vw, 4rem);
     position: sticky;
     top: 0;
     z-index: 50;
@@ -86,16 +86,28 @@
 
   .brand {
     font-family: var(--font-display);
-    color: var(--color-text-primary);
-    font-size: 1.25rem;
-    font-weight: 800;
+    font-size: 1.2rem;
+    font-weight: 700;
     text-decoration: none;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    transition: opacity var(--transition-fast);
+  }
+
+  .brand::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
     background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    box-shadow: 0 0 10px var(--color-primary-glow);
+  }
+
+  .brand:hover {
+    opacity: 0.85;
   }
 
   nav {
@@ -103,7 +115,7 @@
     gap: 1.5rem;
     align-items: center;
     color: var(--color-text-secondary);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 500;
   }
 

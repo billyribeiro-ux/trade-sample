@@ -38,48 +38,50 @@
   <title>Admin purchases - The Trading Store</title>
 </svelte:head>
 
-<main class="page">
-  <header>
+<main class="page-shell">
+  <header class="page-header">
     <p class="eyebrow">Admin</p>
     <h1>Purchases</h1>
-    <p>Search payments, monitor disputes, and initiate Stripe refunds.</p>
+    <p class="lede">Search payments, monitor disputes, and initiate Stripe refunds.</p>
   </header>
 
-  <section class="summary" aria-label="Purchase summary">
-    <article><span>{data.summary.totalCount}</span><p>Total</p></article>
-    <article><span>{data.summary.completedCount}</span><p>Completed</p></article>
-    <article><span>{data.summary.refundedCount}</span><p>Refunded</p></article>
-    <article><span>{data.summary.disputedCount}</span><p>Disputed</p></article>
-    <article><span>{money(data.summary.revenueCents, 'usd')}</span><p>Completed revenue</p></article>
+  <section class="stat-grid" aria-label="Purchase summary">
+    <article class="stat-card"><span class="value">{data.summary.totalCount}</span><span class="label">Total</span></article>
+    <article class="stat-card"><span class="value">{data.summary.completedCount}</span><span class="label">Completed</span></article>
+    <article class="stat-card"><span class="value">{data.summary.refundedCount}</span><span class="label">Refunded</span></article>
+    <article class="stat-card"><span class="value">{data.summary.disputedCount}</span><span class="label">Disputed</span></article>
+    <article class="stat-card"><span class="value">{money(data.summary.revenueCents, 'usd')}</span><span class="label">Completed revenue</span></article>
   </section>
 
-  <form class="filters" method="GET">
-    <label>
-      Search
+  <form class="filter-bar" method="GET">
+    <div class="form-group">
+      <span class="form-label">Search</span>
       <input name="q" placeholder="Email or book" value={data.filters.query} />
-    </label>
-    <label>
-      Status
+    </div>
+    <div class="form-group">
+      <span class="form-label">Status</span>
       <select name="status">
         <option value="">All statuses</option>
-        {#each data.purchaseStatuses as status}
+        {#each data.purchaseStatuses as status (status)}
           <option value={status} selected={data.filters.status === status}>{status}</option>
         {/each}
       </select>
-    </label>
-    <button type="submit">Apply</button>
-    <a href="/admin/purchases">Reset</a>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" type="submit">Apply</button>
+      <a class="btn btn-ghost" href="/admin/purchases">Reset</a>
+    </div>
   </form>
 
   {#if message}
-    <p class="success" aria-live="polite">{message}</p>
+    <p class="success-text" aria-live="polite">{message}</p>
   {/if}
   {#if error}
-    <p class="error" aria-live="polite">{error}</p>
+    <p class="error-text" aria-live="polite">{error}</p>
   {/if}
 
-  <section class="table-wrap" aria-label="Purchase list">
-    <table>
+  <section class="table-shell scroll-x" aria-label="Purchase list">
+    <table class="data-table">
       <thead>
         <tr>
           <th>Customer</th>
@@ -92,22 +94,34 @@
         </tr>
       </thead>
       <tbody>
-        {#each data.purchases as purchase}
+        {#each data.purchases as purchase (purchase.id)}
           <tr>
             <td>{purchase.customerEmail}</td>
             <td>{purchase.productName}</td>
-            <td><span class={`status ${purchase.status}`}>{purchase.status}</span></td>
-            <td>{money(purchase.amountPaidCents, purchase.currency)}</td>
+            <td>
+              {#if purchase.status === 'completed'}
+                <span class="badge badge-success">{purchase.status}</span>
+              {:else if purchase.status === 'refunded'}
+                <span class="badge badge-warning">{purchase.status}</span>
+              {:else if purchase.status === 'disputed'}
+                <span class="badge badge-danger">{purchase.status}</span>
+              {:else}
+                <span class="badge badge-neutral">{purchase.status}</span>
+              {/if}
+            </td>
+            <td class="num">{money(purchase.amountPaidCents, purchase.currency)}</td>
             <td>{formatDate(purchase.purchasedAt)}</td>
             <td>
-              <span>{purchase.stripePaymentIntentId}</span>
-              {#if purchase.receiptUrl}
-                <a href={purchase.receiptUrl} target="_blank" rel="noreferrer">Receipt</a>
-              {/if}
+              <div class="stripe-cell">
+                <code class="stripe-id">{purchase.stripePaymentIntentId}</code>
+                {#if purchase.receiptUrl}
+                  <a class="link" href={purchase.receiptUrl} target="_blank" rel="noreferrer">Receipt</a>
+                {/if}
+              </div>
             </td>
             <td>
               {#if purchase.status === 'completed'}
-                <button disabled={refunding === purchase.id} onclick={() => refundPurchase(purchase.id)}>
+                <button class="btn btn-danger" disabled={refunding === purchase.id} onclick={() => refundPurchase(purchase.id)}>
                   {refunding === purchase.id ? 'Starting...' : 'Refund'}
                 </button>
               {:else}
@@ -122,148 +136,23 @@
 </main>
 
 <style>
-  .page {
-    display: grid;
-    gap: 1.5rem;
-    padding: clamp(2rem, 6vw, 6rem);
-  }
-
-  h1,
-  p {
-    margin: 0;
-  }
-
-  header {
-    display: grid;
-    gap: 0.5rem;
-  }
-
-  header p,
-  label,
-  .muted {
-    color: oklch(70% 0.018 255);
-  }
-
-  .eyebrow {
-    color: oklch(68% 0.14 150);
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-    gap: 1rem;
-  }
-
-  .summary article,
-  .filters,
-  .table-wrap {
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 8px;
-    background: oklch(17% 0.026 260);
-  }
-
-  .summary article {
-    display: grid;
-    gap: 0.25rem;
-    padding: 1rem;
-  }
-
-  .summary span {
-    font-weight: 800;
-  }
-
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  label {
-    display: grid;
-    gap: 0.4rem;
-    min-inline-size: min(100%, 16rem);
-    font-size: 0.9rem;
-  }
-
-  input,
-  select {
-    min-block-size: 2.5rem;
-    border: 1px solid oklch(28% 0.028 260);
-    border-radius: 6px;
-    padding-inline: 0.75rem;
-    color: oklch(93% 0.012 255);
-    background: oklch(13% 0.025 260);
-    font: inherit;
-  }
-
-  button {
-    min-block-size: 2.5rem;
-    border: 0;
-    border-radius: 6px;
-    padding-inline: 1rem;
-    color: oklch(13% 0.025 260);
-    background: oklch(64% 0.18 255);
-    font: inherit;
-    font-weight: 700;
-  }
-
-  button:disabled {
-    cursor: wait;
-    opacity: 0.7;
-  }
-
-  .table-wrap {
+  .scroll-x {
     overflow-x: auto;
   }
 
-  table {
-    inline-size: 100%;
-    min-inline-size: 58rem;
-    border-collapse: collapse;
+  .stripe-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
   }
 
-  th,
-  td {
-    padding: 0.75rem;
-    border-block-end: 1px solid oklch(28% 0.028 260);
-    text-align: start;
-    vertical-align: top;
-  }
-
-  td span {
-    display: block;
-    overflow-wrap: anywhere;
-  }
-
-  .status {
-    display: inline-block;
-    border-radius: 999px;
-    padding: 0.2rem 0.55rem;
-    background: oklch(24% 0.032 260);
-    color: oklch(80% 0.018 255);
+  .stripe-id {
     font-size: 0.8rem;
-  }
-
-  .status.completed {
-    color: oklch(72% 0.16 150);
-  }
-
-  .status.refunded,
-  .status.disputed {
-    color: oklch(76% 0.16 60);
-  }
-
-  a,
-  .success {
-    color: oklch(70% 0.18 255);
-  }
-
-  .error {
-    color: oklch(64% 0.18 25);
+    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-sm);
+    word-break: break-all;
   }
 </style>

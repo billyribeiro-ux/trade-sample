@@ -20,6 +20,10 @@ export const forgotPasswordSchema = v.object({
   email: emailSchema,
 });
 
+export const updateProfileSchema = v.object({
+  name: v.pipe(v.string(), v.trim(), v.minLength(1), v.maxLength(120)),
+});
+
 export const changePasswordSchema = v.object({
   currentPassword: passwordSchema,
   newPassword: passwordSchema,

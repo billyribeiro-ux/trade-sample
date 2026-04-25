@@ -27,6 +27,18 @@
   {@render children()}
 </div>
 
+<footer class="site-footer">
+  <div>
+    <strong>The Trading Store</strong>
+    <p>support@thetrading.store</p>
+  </div>
+  <nav aria-label="Legal">
+    <a href="/legal/terms">Terms</a>
+    <a href="/legal/privacy">Privacy</a>
+    <a href="/legal/refunds">Refunds</a>
+  </nav>
+</footer>
+
 <style>
   :global(body) {
     margin: 0;
@@ -76,6 +88,21 @@
     border-block-end: 1px solid oklch(28% 0.028 260);
   }
 
+  .site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem clamp(1rem, 4vw, 4rem);
+    border-block-start: 1px solid oklch(28% 0.028 260);
+    color: oklch(70% 0.018 255);
+  }
+
+  .site-footer p {
+    margin: 0.25rem 0 0;
+    font-size: 0.875rem;
+  }
+
   .brand {
     color: oklch(93% 0.012 255);
     font-weight: 700;
@@ -91,5 +118,13 @@
 
   nav a {
     text-decoration: none;
+  }
+
+  @media (max-width: 40rem) {
+    .site-header,
+    .site-footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
   }
 </style>

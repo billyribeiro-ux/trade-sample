@@ -16,6 +16,9 @@ Semantic Versioning after `v1.0.0`.
   audit context, and manual entitlement grant/revoke workflows.
 - Added Stripe checkout success reconciliation, receipt capture, payment failure
   audit logging, and dispute webhook entitlement revocation.
+- Added editable account profile/password flows, active session revocation,
+  admin purchase filters/refunds, audit-log filters, legal pages, and email
+  verification redirect routes.
 
 ### Changed
 

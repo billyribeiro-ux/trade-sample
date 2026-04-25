@@ -141,6 +141,128 @@
 | 16 | 2026-04-24 | 5 | `src/routes/auth/sign-up/+page.svelte` | d004343 | feat(auth): add authentication and security foundation |
 | 17 | 2026-04-24 | 5 | `tsconfig.json` | d004343 | feat(auth): add authentication and security foundation |
 
+## Phase 6 - Core CRUD
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+| 1 | 2026-04-24 | 6 | `.env.example` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 2 | 2026-04-24 | 6 | `src/lib/schemas/product.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 3 | 2026-04-24 | 6 | `src/lib/server/auth/guards.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 4 | 2026-04-24 | 6 | `src/lib/server/http.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 5 | 2026-04-24 | 6 | `src/lib/server/services/downloads.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 6 | 2026-04-24 | 6 | `src/lib/server/services/products.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 7 | 2026-04-24 | 6 | `src/lib/server/storage/blob.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 8 | 2026-04-24 | 6 | `src/lib/server/storage/download-token.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 9 | 2026-04-24 | 6 | `src/routes/api/admin/products/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 10 | 2026-04-24 | 6 | `src/routes/api/admin/products/[slug]/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 11 | 2026-04-24 | 6 | `src/routes/api/admin/products/[slug]/upload-cover/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 12 | 2026-04-24 | 6 | `src/routes/api/admin/products/[slug]/upload-file/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 13 | 2026-04-24 | 6 | `src/routes/api/admin/purchases/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 14 | 2026-04-24 | 6 | `src/routes/api/books/[slug]/download/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 15 | 2026-04-24 | 6 | `src/routes/api/books/[slug]/file/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 16 | 2026-04-24 | 6 | `src/routes/api/products/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 17 | 2026-04-24 | 6 | `src/routes/api/purchases/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+| 18 | 2026-04-24 | 6 | `src/routes/api/purchases/[id]/+server.ts` | 2baf6fb | feat(crud): add products purchases and protected downloads |
+
+## Phase 7 - Email Service
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+## Phase 8 - Stripe Foundation
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+## Phase 9 - Purchase Services & Webhooks
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+## Phase 10 - Stripe & Plan Seeding
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+| 1 | 2026-04-24 | 10 | `drizzle/migrations/0001_add_stripe_customer_id.sql` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 2 | 2026-04-24 | 10 | `drizzle/migrations/meta/0001_snapshot.json` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 3 | 2026-04-24 | 10 | `drizzle/migrations/meta/_journal.json` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 4 | 2026-04-24 | 10 | `drizzle/seed/stripe-sync.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 5 | 2026-04-24 | 10 | `package.json` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 6 | 2026-04-24 | 10 | `pnpm-lock.yaml` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 7 | 2026-04-24 | 10 | `src/lib/server/auth/index.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 8 | 2026-04-24 | 10 | `src/lib/server/db/schema/auth.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 9 | 2026-04-24 | 10 | `src/lib/server/email/index.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 10 | 2026-04-24 | 10 | `src/lib/server/email/templates.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 11 | 2026-04-24 | 10 | `src/lib/server/services/checkout.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 12 | 2026-04-24 | 10 | `src/lib/server/services/purchase-processor.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 13 | 2026-04-24 | 10 | `src/lib/server/stripe/client.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 14 | 2026-04-24 | 10 | `src/routes/api/admin/purchases/+server.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 15 | 2026-04-24 | 10 | `src/routes/api/admin/purchases/[id]/refund/+server.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 16 | 2026-04-24 | 10 | `src/routes/api/checkout/+server.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 17 | 2026-04-24 | 10 | `src/routes/api/purchases/[id]/+server.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+| 18 | 2026-04-24 | 10 | `src/routes/api/webhooks/stripe/+server.ts` | 73edcee | feat(billing): add email stripe checkout and webhooks |
+
+## Phase 11 - Storefront & Checkout
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+## Phase 12 - Member Dashboard
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+## Phase 13 - Admin Dashboard
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+| 1 | 2026-04-24 | 13 | `src/routes/+layout.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 2 | 2026-04-24 | 13 | `src/routes/+layout.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 3 | 2026-04-24 | 13 | `src/routes/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 4 | 2026-04-24 | 13 | `src/routes/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 5 | 2026-04-24 | 13 | `src/routes/account/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 6 | 2026-04-24 | 13 | `src/routes/account/purchases/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 7 | 2026-04-24 | 13 | `src/routes/account/purchases/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 8 | 2026-04-24 | 13 | `src/routes/account/security/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 9 | 2026-04-24 | 13 | `src/routes/admin/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 10 | 2026-04-24 | 13 | `src/routes/admin/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 11 | 2026-04-24 | 13 | `src/routes/admin/audit-log/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 12 | 2026-04-24 | 13 | `src/routes/admin/audit-log/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 13 | 2026-04-24 | 13 | `src/routes/admin/customers/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 14 | 2026-04-24 | 13 | `src/routes/admin/customers/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 15 | 2026-04-24 | 13 | `src/routes/admin/products/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 16 | 2026-04-24 | 13 | `src/routes/admin/products/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 17 | 2026-04-24 | 13 | `src/routes/admin/products/[slug]/edit/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 18 | 2026-04-24 | 13 | `src/routes/admin/products/[slug]/edit/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 19 | 2026-04-24 | 13 | `src/routes/admin/purchases/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 20 | 2026-04-24 | 13 | `src/routes/admin/purchases/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 21 | 2026-04-24 | 13 | `src/routes/api/admin/purchases/[id]/refund/+server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 22 | 2026-04-24 | 13 | `src/routes/books/[slug]/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 23 | 2026-04-24 | 13 | `src/routes/books/[slug]/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 24 | 2026-04-24 | 13 | `src/routes/checkout/cancel/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 25 | 2026-04-24 | 13 | `src/routes/checkout/success/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 26 | 2026-04-24 | 13 | `src/routes/library/+page.server.ts` | 4b14f63 | feat(ui): add storefront library and admin pages |
+| 27 | 2026-04-24 | 13 | `src/routes/library/+page.svelte` | 4b14f63 | feat(ui): add storefront library and admin pages |
+
+## Phase 14 - Testing & CI/CD
+
+| # | Date | Phase | File | Commit | Subject |
+|---|---|---|---|---|---|
+
+| 1 | 2026-04-24 | 14 | `docs/runbooks/blob-file-replacement.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 2 | 2026-04-24 | 14 | `docs/runbooks/deploy-production.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 3 | 2026-04-24 | 14 | `docs/runbooks/domain-attachment.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 4 | 2026-04-24 | 14 | `docs/runbooks/incident-response.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 5 | 2026-04-24 | 14 | `docs/runbooks/local-development.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 6 | 2026-04-24 | 14 | `docs/runbooks/refund-process.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 7 | 2026-04-24 | 14 | `docs/runbooks/stripe-testing.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 8 | 2026-04-24 | 14 | `docs/runbooks/stripe-webhook-replay.md` | 598d57d | test(ci): add local safety tests and runbooks |
+| 9 | 2026-04-24 | 14 | `src/lib/server/auth/password.test.ts` | 598d57d | test(ci): add local safety tests and runbooks |
+| 10 | 2026-04-24 | 14 | `src/lib/server/storage/download-token.test.ts` | 598d57d | test(ci): add local safety tests and runbooks |
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |
@@ -151,3 +273,4 @@
 | v0.4.0 | 2026-04-24 | 3 | d004343 | Phase 3: Authentication complete |
 | v0.5.0 | 2026-04-24 | 4 | d004343 | Phase 4: RBAC and permissions complete |
 | v0.6.0 | 2026-04-24 | 5 | pending | Phase 5: Validation and security complete |
+| v1.0.0 | 2026-04-24 | 14 | pending | Local v1 build complete |

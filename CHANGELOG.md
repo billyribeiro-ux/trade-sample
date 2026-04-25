@@ -7,6 +7,16 @@ Semantic Versioning after `v1.0.0`.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-04-24
+
+### Added
+
+- Added storefront, book detail pages, Stripe checkout trigger, checkout
+  success/cancel states, member library, account pages, and admin dashboards.
+- Added protected download endpoint, private Blob streaming, product CRUD,
+  purchase APIs, refund endpoint, Stripe webhook processing, Stripe sync script,
+  transactional email service, runbooks, and local unit safety tests.
+
 ## [0.6.0] - 2026-04-24
 
 ### Added

@@ -28,38 +28,38 @@
 
 - Valibot schemas, rate limiting, CSP, and centralized errors.
 
-## Phase 6: Core CRUD
+## Phase 6: Core CRUD - Complete
 
 - Products, purchases, downloads, storage, entitlements, and audit APIs.
 
-## Phase 7: Email Service
+## Phase 7: Email Service - Complete
 
 - Resend integration and transactional templates.
 
-## Phase 8: Stripe Foundation
+## Phase 8: Stripe Foundation - Complete
 
 - Stripe client, webhook verification, and event persistence.
 
-## Phase 9: Purchase Services & Webhooks
+## Phase 9: Purchase Services & Webhooks - Complete
 
 - Checkout completion, refunds, disputes, and entitlement transitions.
 
-## Phase 10: Stripe & Plan Seeding
+## Phase 10: Stripe & Plan Seeding - Complete
 
 - DB-to-Stripe product and price sync.
 
-## Phase 11: Storefront & Checkout
+## Phase 11: Storefront & Checkout - Complete
 
 - Landing, book detail, checkout success, and checkout cancel pages.
 
-## Phase 12: Member Dashboard
+## Phase 12: Member Dashboard - Complete
 
 - Library, account, security, and purchase history.
 
-## Phase 13: Admin Dashboard
+## Phase 13: Admin Dashboard - Complete
 
 - Products, customers, purchases, refunds, audit log, and uploads.
 
-## Phase 14: Testing & CI/CD
+## Phase 14: Testing & CI/CD - Complete
 
 - Unit, integration, E2E, CI, production runbooks, and release.

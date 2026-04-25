@@ -320,6 +320,7 @@
 | 32 | 2026-04-25 | 11 | `src/lib/server/services/checkout.ts` | c09a135 | test(e2e): add browser smoke coverage |
 | 33 | 2026-04-25 | 14 | `package.json` | c09a135 | test(e2e): add browser smoke coverage |
 | 34 | 2026-04-25 | 14 | `tests/app.e2e.ts` | e0e3986 | test(e2e): stabilize admin authentication smoke |
+| 35 | 2026-04-25 | 14 | `tests/app.e2e.ts` | 6d6222a | test(e2e): avoid hydration race in checkout smoke |
 
 ## Latest Verification
 

@@ -11,6 +11,7 @@ export const users = pgTable(
     emailVerified: boolean('email_verified').notNull().default(false),
     name: text('name'),
     image: text('image'),
+    stripeCustomerId: text('stripe_customer_id'),
     createdAt,
     updatedAt,
   },

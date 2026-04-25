@@ -30,4 +30,3 @@ export async function GET(event: RequestEvent): Promise<Response> {
     return handleApiError(error);
   }
 }
-

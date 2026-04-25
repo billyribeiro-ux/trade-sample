@@ -20,6 +20,8 @@
     "test": "vitest run",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
+    "stripe:listen": "stripe listen --forward-to localhost:5173/api/webhooks/stripe",
+    "stripe:sync": "tsx drizzle/seed/stripe-sync.ts",
     "ci": "pnpm lint && pnpm check && pnpm test && pnpm build"
   },
   "devDependencies": {
@@ -50,11 +52,14 @@
     "@better-auth/drizzle-adapter": "^1.6.9",
     "@neondatabase/serverless": "^1.1.0",
     "@opentelemetry/api": "^1.9.1",
+    "@react-email/render": "^2.0.7",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.37.0",
     "@vercel/blob": "^2.3.3",
     "better-auth": "^1.6.9",
     "drizzle-orm": "^0.45.2",
+    "resend": "^6.12.2",
+    "stripe": "^22.1.0",
     "sveltekit-superforms": "^2.30.1",
     "valibot": "^1.3.1"
   }

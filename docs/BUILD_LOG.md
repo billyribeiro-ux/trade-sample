@@ -263,6 +263,11 @@
 | 9 | 2026-04-24 | 14 | `src/lib/server/auth/password.test.ts` | 598d57d | test(ci): add local safety tests and runbooks |
 | 10 | 2026-04-24 | 14 | `src/lib/server/storage/download-token.test.ts` | 598d57d | test(ci): add local safety tests and runbooks |
 
+| 11 | 2026-04-24 | 14 | `CHANGELOG.md` | 4b10d97 | chore(release): prepare local v1.0.0 |
+| 12 | 2026-04-24 | 14 | `ROADMAP.md` | 4b10d97 | chore(release): prepare local v1.0.0 |
+| 13 | 2026-04-24 | 14 | `docs/BUILD_LOG.md` | 4b10d97 | chore(release): prepare local v1.0.0 |
+| 14 | 2026-04-24 | 14 | `package.json` | 4b10d97 | chore(release): prepare local v1.0.0 |
+
 ## Milestone Tags
 
 | Tag | Date | Phase | Commit | Description |
@@ -273,4 +278,4 @@
 | v0.4.0 | 2026-04-24 | 3 | d004343 | Phase 3: Authentication complete |
 | v0.5.0 | 2026-04-24 | 4 | d004343 | Phase 4: RBAC and permissions complete |
 | v0.6.0 | 2026-04-24 | 5 | pending | Phase 5: Validation and security complete |
-| v1.0.0 | 2026-04-24 | 14 | pending | Local v1 build complete |
+| v1.0.0 | 2026-04-24 | 14 | 4b10d97 | Local v1 build complete |

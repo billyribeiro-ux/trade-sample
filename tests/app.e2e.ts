@@ -11,8 +11,11 @@ test('public storefront, legal pages, and protected redirects work', async ({ pa
   await page.goto('/books/book-2');
   await expect(page.getByRole('heading', { name: 'Book 2' })).toBeVisible();
   await expect(page.getByText('limited to 3 downloads per account')).toBeVisible();
-  await page.getByRole('button', { name: /Buy now/ }).click();
-  await expect(page).toHaveURL(/\/auth\/sign-up\?intent=purchase&product=book-2/);
+
+  const checkoutResponse = await page.request.post('/api/checkout', {
+    data: { slug: 'book-2' },
+  });
+  expect(checkoutResponse.status()).toBe(401);
 
   await page.goto('/library');
   await expect(page).toHaveURL(/\/auth\/sign-in\?redirect=%2Flibrary/);

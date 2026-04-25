@@ -12,6 +12,8 @@ Semantic Versioning after `v1.0.0`.
 - Added Docker Compose local Postgres on host port `55432` with `pnpm db:up`
   and `pnpm db:down` scripts.
 - Added programmatic Drizzle migration script for reliable localhost migrations.
+- Added admin customer detail pages with purchase history, entitlement history,
+  audit context, and manual entitlement grant/revoke workflows.
 
 ### Changed
 
